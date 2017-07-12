@@ -1,0 +1,68 @@
+<?php
+
+namespace DM\ShopmodeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Produit
+ *
+ * @ORM\Table(name="produit", uniqueConstraints={@ORM\UniqueConstraint(name="id", columns={"id"})})
+ * @ORM\Entity
+ */
+class Produit
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="stock", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $stock;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ref", type="integer", nullable=false)
+     */
+    private $ref;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cat", type="string", length=16, nullable=false)
+     */
+    private $cat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="text", length=65535, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $prix;
+
+
+}
+

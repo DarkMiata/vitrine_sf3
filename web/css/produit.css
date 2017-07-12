@@ -1,0 +1,42 @@
+/*
+CSS de la page d'affichage produits
+*/
+
+
+.produit {
+/*  margin-left: 20px;*/
+  margin-bottom: 0px;
+  height: 220px;
+}
+
+.nomProd {
+  font-size: 1.3em;
+}
+
+.descriptRapProd {
+  font-size: 1.3em; 
+}
+
+.descriptProd {
+  font-size: 0.8em;  
+}
+
+.prixProd {
+  color: red; font-size: 1.5em;
+}
+
+.stockProd {
+  font-size: 1.2em; color: #aaa;
+}
+
+.stock_epuise {
+  color: #aaa;
+}
+
+.stock_enStock {
+  color: #3a3;
+}
+
+.imgProd {
+  width: 50px; height: 50px;
+}

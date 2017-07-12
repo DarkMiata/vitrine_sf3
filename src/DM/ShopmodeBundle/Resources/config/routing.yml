@@ -1,0 +1,19 @@
+dm_shopmode_homepage:
+    path:     /
+    defaults: { _controller: DMShopmodeBundle:Default:index }
+    
+dm_shopmode_viewByID:
+    path:     /viewbyid/{id}
+    defaults: { _controller: DMShopmodeBundle:Default:viewByID }
+
+dm_shopmode_viewByRef:
+    path:     /viewbyref/{ref}
+    defaults: { _controller: DMShopmodeBundle:Default:viewByRef }
+
+dm_shopmode_viewByMarque:
+    path:     /viewbymarque/{marque}
+    defaults: { _controller: DMShopmodeBundle:Default:viewByMarque }
+
+bootstrap:
+    path:     /bootstrap
+    defaults: { _controller: DMShopmodeBundle:Test:bootstrap }

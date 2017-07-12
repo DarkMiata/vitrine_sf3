@@ -1,0 +1,7 @@
+dm_shopmode:
+    resource: "@DMShopmodeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
