@@ -14,6 +14,14 @@ dm_shopmode_viewByMarque:
     path:     /viewbymarque/{marque}
     defaults: { _controller: DMShopmodeBundle:Default:viewByMarque }
 
+dm_shopmode_viewBlockByID:
+    path:     /viewblockbyid/{id}
+    defaults: { _controller: DMShopmodeBundle:Default:viewBlockByID }
+
 bootstrap:
     path:     /bootstrap
     defaults: { _controller: DMShopmodeBundle:Test:bootstrap }
+
+dm_shopmode_viewBlockList:
+    path:     /viewblocklist
+    defaults: { _controller: DMShopmodeBundle:Default:viewBlockList }

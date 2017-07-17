@@ -1,6 +1,6 @@
 dm_shopmode:
     resource: "@DMShopmodeBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /shop/
 
 app:
     resource: '@AppBundle/Controller/'

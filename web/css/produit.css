@@ -2,15 +2,20 @@
 CSS de la page d'affichage produits
 */
 
-
-.produit {
+/* block produit */
+.blockProduit {
 /*  margin-left: 20px;*/
-  margin-bottom: 0px;
-  height: 220px;
+  margin-bottom: 00px;
+  margin-top: 00px;
+  height: 300px;
+  width: 300px;
+  padding-top: 25px;
 }
 
 .nomProd {
-  font-size: 1.3em;
+  font-size: 1em;
+  height: 3em;
+  width: 280px;
 }
 
 .descriptRapProd {
@@ -38,5 +43,11 @@ CSS de la page d'affichage produits
 }
 
 .imgProd {
-  width: 50px; height: 50px;
+  width: 200px; height: 200px;
+}
+
+.btnPanierProduit {
+  width: 100px;
+  height: 50px;
+  font-size: 0.8em;
 }

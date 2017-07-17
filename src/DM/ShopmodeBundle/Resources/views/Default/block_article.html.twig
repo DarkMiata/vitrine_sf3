@@ -1,9 +1,4 @@
 
-
-<!-- <img src="{{ asset('images/{{ article.image }}') }}" 
-         height=33% width=33% alt="" />
--->
-
 <!-- CSS produit.css -->
 
 <div class="produit col-xs-6 col-sm-4 col-md-3">
@@ -11,44 +6,17 @@
     {{ article.prix }}€</div>
 
   <div class="nomProd">
-    {{ article.nom }}</div>
+    {{ article.name }}</div>
 
-  <div class="descriptProd">
-    {{ article.description }}</div>
-
-  <div class="imgProd">
-    image</div>
+      <div class="imgProd">
+        <img src="{{ asset('images/') }}{{ article.photo }}" 
+             height=200px width=200px alt="" />
+      </div>
 
   <div class="stockProd">
     stock</div>
 
-  bloc_boutonPanier($produit)
-
+  <div class="btnPanierProduit">
+   bloc_boutonPanier($produit)
+  </div>
 </div>
-
-
-
-<!-- Ancien css:
-
-
-<div class="produit col-xs-6 col-sm-4 col-md-3">
-  <div class="prixProd">
-    <?php echo $produit['prix']; ?>€</div>
-
-  <div class="nomProd">
-    <?php echo $produit['nom']; ?></div>
-
-  <div class="descriptProd">
-    <?php echo $produit['description']; ?></div>
-
-  <div class="imgProd">
-    <?php /* image */ ?></div>
-
-  <div class="stockProd">
-    <?php echo $produit['stock']; ?></div>
-
-  <?php bloc_boutonPanier($produit); ?>
-
-</div>
-
--->

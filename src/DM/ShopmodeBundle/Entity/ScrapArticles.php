@@ -85,6 +85,7 @@ class ScrapArticles
     private $catName;
 
 
+    private $photo;
 
     /**
      * Get id
@@ -311,4 +312,16 @@ class ScrapArticles
     {
         return $this->catName;
     }
+
+
+    public function getPhoto() {
+      return $this->photo;
+    }
+    public function setPhoto($photo) {
+      $this->photo = $photo;
+    }
+
+
 }
+
+
