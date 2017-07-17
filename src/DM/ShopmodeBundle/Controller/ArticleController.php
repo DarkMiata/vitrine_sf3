@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends Controller
+class ArticleController extends Controller
   {
   /**
   * @Route("/", name="dm_shopmode_homepage")
