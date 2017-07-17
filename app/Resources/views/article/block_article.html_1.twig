@@ -1,0 +1,22 @@
+
+<!-- CSS produit.css -->
+
+<div class="produit col-xs-6 col-sm-4 col-md-3">
+  <div class="prixProd">
+    {{ article.prix }}€</div>
+
+  <div class="nomProd">
+    {{ article.name }}</div>
+
+      <div class="imgProd">
+        <img src="{{ asset('images/') }}{{ article.photo }}" 
+             height=200px width=200px alt="" />
+      </div>
+
+  <div class="stockProd">
+    stock</div>
+
+  <div class="btnPanierProduit">
+   bloc_boutonPanier($produit)
+  </div>
+</div>

@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block head %}
   {% block title %}ShopmodeBundle - index{% endblock %}
@@ -9,8 +9,9 @@
   
   <div class="row">
   {% for article in articlesArray %}
-   {% include 'DMShopmodeBundle:Default:block_article.html.twig' with {article: article} %} 
- 
+{#   {% include 'DMShopmodeBundle:Default:block_article.html.twig' with {article: article} %} #}
+    {% include 'article/block_article.html.twig' with {article: article} %} 
+
   {% endfor %}
   </div>
 {% endblock %}

@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends Controller
   {
   /**
-  * @Route("/", name="dm_shopmode_homepage")
-  */
+   * @Route("/", name="dm_shopmode_homepage")
+   */
   public function indexAction() {
-    return $this->render('DMShopmodeBundle:Default:index.html.twig', array(
+    return $this->render('article/index.html.twig', array(
           'article.'
     ));
   }
@@ -21,7 +21,7 @@ class ArticleController extends Controller
    * @Route("/viewbyid/{id}", name="dm_shopmode_viewById")
    */
   public function viewByIDAction($id) {
-    return $this->render('DMShopmodeBundle:Default:viewByID.html.twig', array(
+    return $this->render('article/viewByID.html.twig', array(
           'id' => $id
     ));
   }
@@ -44,7 +44,7 @@ class ArticleController extends Controller
 
     $photo = $this->findPhotoByRef($article->getref());
 
-    return $this->render('DMShopmodeBundle:Default:block_article.html.twig', array(
+    return $this->render('article/block_article.html.twig', array(
           'article' => $article,
           'photo'   => $photo
     ));
@@ -63,7 +63,7 @@ class ArticleController extends Controller
       throw new Exception("ref $ref non trouvé");
     }
 
-    return $this->render('DMShopmodeBundle:Default:viewByRef.html.twig', array('article' => $article));
+    return $this->render('article/viewByRef.html.twig', array('article' => $article));
   }
   // ------------------------
   /**
@@ -79,7 +79,7 @@ class ArticleController extends Controller
       throw new Exception("ref $ref non trouvé");
     }
 
-    return $this->render('DMShopmodeBundle:Default:viewByMarque.html.twig', array('articles' => $articles));
+    return $this->render('article/viewByMarque.html.twig', array('articles' => $articles));
   }
   // ------------------------
   /**
@@ -100,7 +100,7 @@ class ArticleController extends Controller
       $articlesArray[] = $article;
     }
 
-    return $this->render('DMShopmodeBundle:Default:list_block.html.twig', array(
+    return $this->render('article/list_block.html.twig', array(
           'articlesArray' => $articlesArray
     ));
   }
@@ -143,7 +143,7 @@ class ArticleController extends Controller
 
     //var_dump($articleArray);
 
-    return $this->render('DMShopmodeBundle:Default:list_block.html.twig', array('articlesArray' => $articlesArray));
+    return $this->render('article/list_block.html.twig', array('articlesArray' => $articlesArray));
   }
   // ========================================
   }

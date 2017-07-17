@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+  {% block title %}ShopmodeBundle - index{% endblock %}
+{% block stylesheets %}{% endblock %}
+{% endblock %}
+
+{% block body %}
+  
+  <div class="row">
+  {% for article in articlesArray %}
+{#   {% include 'DMShopmodeBundle:Default:block_article.html.twig' with {article: article} %} #}
+    {% include 'article/block_article.html.twig' with {article: article} %} 
+
+  {% endfor %}
+  </div>
+{% endblock %}
