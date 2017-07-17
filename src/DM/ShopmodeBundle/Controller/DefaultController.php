@@ -4,21 +4,31 @@ namespace DM\ShopmodeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends Controller
   {
+  /**
+  * @Route("/", name="dm_shopmode_homepage")
+  */
   public function indexAction() {
     return $this->render('DMShopmodeBundle:Default:index.html.twig', array(
           'article.'
     ));
   }
   // ------------------------
+  /**
+   * @Route("/viewbyid/{id}", name="dm_shopmode_viewById")
+   */
   public function viewByIDAction($id) {
     return $this->render('DMShopmodeBundle:Default:viewByID.html.twig', array(
           'id' => $id
     ));
   }
   // ------------------------
+  /**
+   * @Route("/viewblockbyid/{id}", name="dm_shopmode_viewBlockByID")
+   */
   public function viewBlockByIDAction($id) {
 
     $em = $this->getDoctrine()->getManager();
@@ -40,6 +50,9 @@ class DefaultController extends Controller
     ));
   }
   // ------------------------
+  /**
+   * @Route("/viewbyref/{ref}", name="dm_shopmode_viewByRef")
+   */
   public function viewByRefAction($ref) {
     $em = $this->getDoctrine()->getManager();
 
@@ -53,6 +66,9 @@ class DefaultController extends Controller
     return $this->render('DMShopmodeBundle:Default:viewByRef.html.twig', array('article' => $article));
   }
   // ------------------------
+  /**
+   * @Route("/viewbymarque/{marque}", name="dm_shopmode_viewByMarque")
+   */
   public function viewByMarqueAction($marque) {
     $em = $this->getDoctrine()->getManager();
 
@@ -66,6 +82,9 @@ class DefaultController extends Controller
     return $this->render('DMShopmodeBundle:Default:viewByMarque.html.twig', array('articles' => $articles));
   }
   // ------------------------
+  /**
+   * @Route("/viewblocklist", name="dm_shopmode_viewBlockList")
+   */
   public function viewBlockListAction() {
     // création d'un tableau temporaire en manuel
 
@@ -83,7 +102,7 @@ class DefaultController extends Controller
 
     return $this->render('DMShopmodeBundle:Default:list_block.html.twig', array(
           'articlesArray' => $articlesArray
-      ));
+    ));
   }
   // ========================================
   // ========================================

@@ -1,7 +1,12 @@
-dm_shopmode:
-    resource: "@DMShopmodeBundle/Resources/config/routing.yml"
-    prefix:   /shop/
+# !!! A retirer - obsolète
+#dm_shopmode:
+#    resource: "@DMShopmodeBundle/Resources/config/routing.yml"
+#    prefix:   /shop/
 
+dm_shopmode:
+    resource: "@DMShopmodeBundle/Controller/"
+    prefix:   /shop/
+    type: annotation
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
