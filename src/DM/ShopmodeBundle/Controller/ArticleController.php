@@ -8,22 +8,25 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends Controller
   {
+  const ARTICLE_PAR_PAGE = 8;
+
+  // ========================================
+  // ========================================
+
   /**
    * @Route("/", name="dm_shopmode_homepage")
    */
   public function indexAction() {
-    return $this->render('article/index.html.twig', array(
+    return $this->render('article/index.html.twig', [
           'article.'
-    ));
+    ]);
   }
   // ------------------------
   /**
    * @Route("/viewbyid/{id}", name="dm_shopmode_viewById")
    */
   public function viewByIDAction($id) {
-    return $this->render('article/viewByID.html.twig', array(
-          'id' => $id
-    ));
+    return $this->render('article/viewByID.html.twig', ['id' => $id]);
   }
   // ------------------------
   /**
@@ -34,7 +37,7 @@ class ArticleController extends Controller
     $em = $this->getDoctrine()->getManager();
 
     $article = $em->getRepository('DMShopmodeBundle:ScrapArticles')
-        ->findOneBy(array('id' => $id));
+        ->findOneBy(['id' => $id]);
 
     if ($article === NULL) {
       throw new Exception("view block by id, id $id non trouvé");
@@ -44,10 +47,10 @@ class ArticleController extends Controller
 
     $photo = $this->findPhotoByRef($article->getref());
 
-    return $this->render('article/block_article.html.twig', array(
+    return $this->render('article/block_article.html.twig', [
           'article' => $article,
           'photo'   => $photo
-    ));
+    ]);
   }
   // ------------------------
   /**
@@ -63,7 +66,8 @@ class ArticleController extends Controller
       throw new Exception("ref $ref non trouvé");
     }
 
-    return $this->render('article/viewByRef.html.twig', array('article' => $article));
+    return $this->render('article/viewByRef.html.twig', [
+          'article' => $article]);
   }
   // ------------------------
   /**
@@ -76,37 +80,60 @@ class ArticleController extends Controller
         ->findBy(array('marque' => $marque));
 
     if ($articles === null) {
-      throw new Exception("ref $ref non trouvé");
+      throw new Exception("marque $marque non trouvé");
     }
 
-    return $this->render('article/viewByMarque.html.twig', array('articles' => $articles));
+    return $this->render('article/viewByMarque.html.twig', [
+          'articles' => $articles]);
   }
   // ------------------------
   /**
-   * @Route("/viewblocklist", name="dm_shopmode_viewBlockList")
+   * @Route("/viewblocklist/{cat}/{page}", name="dm_shopmode_viewBlockList")
    */
-  public function viewBlockListAction() {
-    // création d'un tableau temporaire en manuel
+  public function viewBlockListAction($cat, $page) {
 
-    $listIdArray = array(4, 5, 6, 7, 8, 9, 10);
+    // !!! définir erreur si $page <= 0 ou > ??
 
+    $indexPage = ($page-1)*self::ARTICLE_PAR_PAGE;
 
-    foreach ($listIdArray as $id) {
-      $article       = $this->findArticleById($id);
-      $photoFileName = $this->findPhotoByRef($article->getref())->getFileName();
+    $em = $this->getDoctrine()->getManager();
+
+    $articles = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+        ->findby(
+            ['catName' => $cat],
+            ['id' => 'asc'],
+            self::ARTICLE_PAR_PAGE,
+            $indexPage
+            );
+
+    //var_dump($articles);
+
+    foreach ($articles as $article) {
+      // récupère le chemin de la première photo de chaque article
+
+      $photo   = $this->findPhotoByRef($article->getref());
+
+      // Si la photo par la référence n'est pas trouvé, le path = ""
+      if ($photo === null) {
+      $photoFileName = "";
+      }
+      else {
+      $photoFileName = $photo->getFileName();
+      }
 
       $article->setPhoto($photoFileName);
-
+      // créé le tableau de chaque article avec l'information de phot
       $articlesArray[] = $article;
     }
 
-    return $this->render('article/list_block.html.twig', array(
-          'articlesArray' => $articlesArray
-    ));
+    return $this->render('article/list_block.html.twig', [
+          'articlesArray' => $articlesArray]);
   }
   // ========================================
   // ========================================
-
+  /**
+   *
+   */
   private function findPhotoByRef($ref) {
     $em = $this->getDoctrine()->getManager();
 
@@ -116,7 +143,7 @@ class ArticleController extends Controller
     //var_dump($photo);
 
     if ($photo === NULL) {
-      throw new Exception("photo by ref, ref $ref non trouvé");
+      //throw new Exception("photo by ref, ref $ref non trouvé");
     }
 
     return $photo;
@@ -143,7 +170,8 @@ class ArticleController extends Controller
 
     //var_dump($articleArray);
 
-    return $this->render('article/list_block.html.twig', array('articlesArray' => $articlesArray));
+    return $this->render('article/list_block.html.twig', [
+          'articlesArray' => $articlesArray]);
   }
   // ========================================
   }
