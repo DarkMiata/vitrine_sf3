@@ -1,0 +1,11 @@
+{% if previousPathUrl == false %}
+  <span><<< </span>
+{% else %}
+  <a href="{{ previousPathUrl }}"><<< </a>
+{% endif %}
+----
+{% if nextPathUrl == false %}
+  <span> >>></span>
+{% else %}
+  <a href="{{ nextPathUrl }}"> >>></a>
+{% endif %}

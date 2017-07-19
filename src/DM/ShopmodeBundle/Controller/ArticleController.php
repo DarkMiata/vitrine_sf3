@@ -105,27 +105,25 @@ class ArticleController extends Controller
    * @Route("/viewblocklist/{cat}/{page}", name="dm_shopmode_viewBlockList")
    */
   public function viewBlockListAction($cat, $page) {
-    // !!! définir erreur si $page <= 0 ou > ??
-
     $countCat   = $this->countCat($cat);
     $maxPage    = ceil($countCat / self::ARTICLE_PAR_PAGE);
     $indexPage  = ($page - 1) * self::ARTICLE_PAR_PAGE;
-
-    $articles = $this->findArticlesByPage($indexPage, $cat);
-
+    $articles   = $this->findArticlesByPage($indexPage, $cat);
 
     foreach ($articles as $article) {
-      $refArticle = $article->getref();
-      $photoFileName = $this->findPathPhotoByRef($refArticle);
+      $photoFileName = $this->findPathPhotoByRef($article->getref());
 
       $article->setPhoto($photoFileName);
-      // créé le tableau de chaque article avec l'information de phot
+      // créé le tableau de chaque article avec l'information de photo
       $articlesArray[] = $article;
     }
+
+    $pathUrlPagin = $this->generatePagination($page, $cat, $maxPage);
 
     return $this->render('article/list_block.html.twig', [
           'articlesArray' => $articlesArray,
           'photoPath'     => $photoFileName,
+          'pathUrl'       => $pathUrlPagin,
         ]);
   }
   // ------------------------
@@ -220,11 +218,13 @@ class ArticleController extends Controller
   }
   // ------------------------
   private function findPathPhotoByRef($ref) {
-    $photo = $this->findPhotoByRef($ref);
+    $photo  = $this->findPhotoByRef($ref);
 
     // Si la photo par la référence n'est pas trouvé, le path = ""
     if ($photo === null) {
       $photoFileName = self::PATH_IMG_NOT_FOUND;
+      $this->get('logger')->error('findPathPhotoByRef - photo path ref: "'
+          .$ref.'" non trouvé');
     }
     else {
       $photoFileName = $photo->getFileName();
@@ -232,6 +232,44 @@ class ArticleController extends Controller
 
     return $photoFileName;
   }
+  // ------------------------
+  private function generatePagination($indexPage, $categorie, $maxPage) {
+    if ($indexPage > $maxPage) { $indexPage = $maxPage; }
+
+    if ($indexPage>=2) {
+      $previousPathUrl = $this->generateUrl('dm_shopmode_viewBlockList', [
+        'cat'   => $categorie,
+        'page'  => $indexPage-1,
+        ]);
+     }
+    else {
+      $previousPathUrl = '';
+    }
+
+    if ($indexPage < $maxPage) {
+      $nextPathUrl = $this->generateUrl('dm_shopmode_viewBlockList', [
+        'cat'   => $categorie,
+        'page'  => $indexPage+1,
+        ]);
+    }
+    else {
+      $nextPathUrl = '';
+    }
+
+    $this->get('logger')
+        ->info('previous: ' . $previousPathUrl
+            . ' - next: '   . $nextPathUrl
+            . ' - max: '    . $maxPage
+        );
+
+    $paths = [
+      'previousPathUrl' => $previousPathUrl,
+      'nextPathUrl'     => $nextPathUrl,
+      ];
+
+    return $paths;
+  }
+
   // ------------------------
   // end class
   }

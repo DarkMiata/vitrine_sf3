@@ -14,4 +14,7 @@
 
   {% endfor %}
   </div>
+  {% include 'article/pagination.html.twig' with 
+    { previousPathUrl:  pathUrl.previousPathUrl,
+      nextPathUrl:      pathUrl.nextPathUrl } %}
 {% endblock %}
