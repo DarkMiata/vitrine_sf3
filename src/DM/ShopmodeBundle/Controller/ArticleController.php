@@ -138,6 +138,27 @@ class ArticleController extends Controller
           'count' => $count,
     ]);
   }
+  // ------------------------
+  /**
+   * @Route("/article/{customRef}", name="dm_shopmode_article")
+   */
+  public function viewArticleAction($customRef) {
+
+    $ref = $customRef; //!!! temporaire !!!
+
+    $em = $this->getDoctrine()->getManager();
+
+    $article = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+        ->findOneBy(array('ref' => $ref));
+
+    $photoFileName = $this->findPhotoByRef($ref)->getFileName();
+
+  return $this->render('article/article.html.twig', [
+      'article'       => $article,
+      'photoFileName' => $photoFileName,
+    ]);
+  }
+
   // ========================================
   // ========================================
   /**
@@ -159,6 +180,7 @@ class ArticleController extends Controller
 
     return $photo;
   }
+
   // ------------------------
   private function findArticleById($id) {
     $em = $this->getDoctrine()->getManager();

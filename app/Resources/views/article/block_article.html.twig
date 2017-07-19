@@ -11,8 +11,14 @@
   id:{{ article.id }} - ref:{{ article.ref }}
 
       <div class="imgProd">
-        <img src="{{ asset('images/') }}{{ article.photo }}" 
+{#        <img src="{{ asset('images/') }}{{ article.photo }}" 
+             height=200px width=200px alt="" />#}
+
+          <a href="{{path('dm_shopmode_article',{'customRef':article.ref }) }}">
+            <img src="{{ asset('images/') }}{{ article.photo }}" 
              height=200px width=200px alt="" />
+          </a>
+
       </div>
 
   <div class="stockProd">

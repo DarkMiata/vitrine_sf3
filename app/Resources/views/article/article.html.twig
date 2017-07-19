@@ -1,0 +1,44 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+  {% block title %}ShopmodeBundle - viewByID - {% endblock %}
+  
+  {% block stylesheets %}
+    <!-- CSS BLZ -->
+{#    <link rel="stylesheet" type="text/css" href="{{asset('css/global91.css')}}">#}
+  {% endblock %}
+  
+{% endblock %}
+
+{% block body %}
+  <h2>vue Article</h2>
+  
+  {# bouton retour à la liste #}
+  <a href="">
+  <img src="{{ asset('images/') }}" alt="retour à la liste" />
+  </a>
+  
+  <table>
+    <tr>
+      <th>
+        <img src="{{ asset('images/') }}{{ photoFileName }}" height=400px width=400px alt="" />
+      </th>
+      <th>
+        {{ article.marque }}<br>
+        {{ article.name }}<br>
+        {{ article.refsite }}<br>
+        {{ article.description }}<br>
+        {{ article.prix }}€<br>
+        ---------------<br>
+        taille:<br>
+        quantité:<br>
+        ajouter au panier<br>
+      </th>
+    </tr>
+    <tr>
+      <td id="views_block">3 mini photos</td>
+      <td id="tab_info">info</td>
+    </tr>
+  </table>
+  
+{% endblock %}
