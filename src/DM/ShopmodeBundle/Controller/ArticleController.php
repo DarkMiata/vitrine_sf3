@@ -5,14 +5,17 @@ namespace DM\ShopmodeBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Routing\Annotation\Route;
+use Psr\Log\LoggerInterface;
+use DM\ShopmodeBundle\Entity\ScrapArticles;
 
 class ArticleController extends Controller
   {
-  const ARTICLE_PAR_PAGE = 8;
+
+  const ARTICLE_PAR_PAGE   = 8;
+  const PATH_IMG_NOT_FOUND = "site/canard-jaune.jpg";
 
   // ========================================
   // ========================================
-
   /**
    * @Route("/", name="dm_shopmode_homepage")
    */
@@ -26,7 +29,18 @@ class ArticleController extends Controller
    * @Route("/viewbyid/{id}", name="dm_shopmode_viewById")
    */
   public function viewByIDAction($id) {
-    return $this->render('article/viewByID.html.twig', ['id' => $id]);
+    $error = "";
+
+    $article = new ScrapArticles();
+    $article = $this->findArticleById($id);
+
+    if ($article === null) {
+    $error = "Id $id non trouvé"; }
+
+    return $this->render('article/viewByID.html.twig', [
+      'error'   => $error,
+      'article' => $article,
+        ]);
   }
   // ------------------------
   /**
@@ -91,35 +105,18 @@ class ArticleController extends Controller
    * @Route("/viewblocklist/{cat}/{page}", name="dm_shopmode_viewBlockList")
    */
   public function viewBlockListAction($cat, $page) {
-
     // !!! définir erreur si $page <= 0 ou > ??
 
-    $indexPage = ($page-1)*self::ARTICLE_PAR_PAGE;
+    $countCat   = $this->countCat($cat);
+    $maxPage    = ceil($countCat / self::ARTICLE_PAR_PAGE);
+    $indexPage  = ($page - 1) * self::ARTICLE_PAR_PAGE;
 
-    $em = $this->getDoctrine()->getManager();
+    $articles = $this->findArticlesByPage($indexPage, $cat);
 
-    $articles = $em->getRepository('DMShopmodeBundle:ScrapArticles')
-        ->findby(
-            ['catName' => $cat],
-            ['id' => 'asc'],
-            self::ARTICLE_PAR_PAGE,
-            $indexPage
-            );
-
-    //var_dump($articles);
 
     foreach ($articles as $article) {
-      // récupère le chemin de la première photo de chaque article
-
-      $photo   = $this->findPhotoByRef($article->getref());
-
-      // Si la photo par la référence n'est pas trouvé, le path = ""
-      if ($photo === null) {
-      $photoFileName = "";
-      }
-      else {
-      $photoFileName = $photo->getFileName();
-      }
+      $refArticle = $article->getref();
+      $photoFileName = $this->findPathPhotoByRef($refArticle);
 
       $article->setPhoto($photoFileName);
       // créé le tableau de chaque article avec l'information de phot
@@ -127,7 +124,21 @@ class ArticleController extends Controller
     }
 
     return $this->render('article/list_block.html.twig', [
-          'articlesArray' => $articlesArray]);
+          'articlesArray' => $articlesArray,
+          'photoPath'     => $photoFileName,
+        ]);
+  }
+  // ------------------------
+  /**
+   * @Route("/count_cat/{cat}", name="dm_shopmode_countCat")
+   */
+  public function countCatAction($cat) {
+    $count = $this->countCat($cat);
+
+    return $this->render('article/count_cat.html.twig', [
+          'cat'   => $cat,
+          'count' => $count,
+    ]);
   }
   // ========================================
   // ========================================
@@ -144,34 +155,84 @@ class ArticleController extends Controller
 
     if ($photo === NULL) {
       //throw new Exception("photo by ref, ref $ref non trouvé");
+
+      $photo = NULL;
     }
 
     return $photo;
   }
   // ------------------------
   private function findArticleById($id) {
-
     $em = $this->getDoctrine()->getManager();
 
     $article = $em->getRepository('DMShopmodeBundle:ScrapArticles')
         ->findOneBy(array('id' => $id));
 
-    if ($article === NULL) {
-      throw new Exception("findArticleById, id $id non trouvé");
-    }
+//    if ($article === NULL) {
+//      throw new Exception("findArticleById, id $id non trouvé");
+//    }
 
     return $article;
   }
   // ------------------------
-  public function viewBlockList($listIdArray) {
-    foreach ($listIdArray as $id) {
-      $articlesArray[] = $this->findArticleById($id);
+  private function countCat(string $cat) {
+    $em = $this->getDoctrine()->getManager();
+
+    $repository = $em->getRepository('DMShopmodeBundle:ScrapArticles');
+
+    $count = $repository
+        ->createQueryBuilder('a')
+        ->select('COUNT(a)')
+        ->where('a.catName = :cat')
+        ->setparameter('cat', $cat)
+        ->getQuery()
+        ->getSingleScalarResult();
+
+    return $count;
+  }
+  // ------------------------
+  private function getArticleFromDB($categorie, $indexPage) {
+    $em = $this->getDoctrine()->getManager();
+
+    $articles = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+        ->findby(
+        ['catName' => $categorie],
+            ['id' => 'asc'],
+            self::ARTICLE_PAR_PAGE,
+            $indexPage
+    );
+
+    return $articles;
+  }
+  // ------------------------
+  private function findArticlesByPage($indexPage, $catName) {
+    $em = $this->getDoctrine()->getManager();
+
+    $articles = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+        ->findby(
+        ['catName' => $catName],
+            ['id' => 'asc'],
+            self::ARTICLE_PAR_PAGE,
+            $indexPage
+    );
+
+    return $articles;
+  }
+  // ------------------------
+  private function findPathPhotoByRef($ref) {
+    $photo = $this->findPhotoByRef($ref);
+
+    // Si la photo par la référence n'est pas trouvé, le path = ""
+    if ($photo === null) {
+      $photoFileName = self::PATH_IMG_NOT_FOUND;
+    }
+    else {
+      $photoFileName = $photo->getFileName();
     }
 
-    //var_dump($articleArray);
+    return $photoFileName;
+  }
+  // ------------------------
+  // end class
+  }
 
-    return $this->render('article/list_block.html.twig', [
-          'articlesArray' => $articlesArray]);
-  }
-  // ========================================
-  }
