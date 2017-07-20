@@ -1,0 +1,4 @@
+services:
+#    dmdb_maintenance.example:
+#        class: DM\DBMaintenanceBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
