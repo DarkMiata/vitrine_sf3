@@ -1,7 +1,7 @@
 dmdb_maintenance:
     resource: "@DMDBMaintenanceBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix: /maint/
 
 # !!! A retirer - obsolète
 #dm_shopmode:
@@ -14,4 +14,5 @@ dm_shopmode:
     type: annotation
 app:
     resource: '@AppBundle/Controller/'
+    prefix:   /
     type: annotation

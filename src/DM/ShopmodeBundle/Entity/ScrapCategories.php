@@ -3,6 +3,7 @@
 namespace DM\ShopmodeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine;
 
 /**
  * ScrapCategories
@@ -156,4 +157,9 @@ class ScrapCategories
     {
         return $this->scan;
     }
+
+  // ========================================
+  // ========================================
+
+  // ========================================
 }

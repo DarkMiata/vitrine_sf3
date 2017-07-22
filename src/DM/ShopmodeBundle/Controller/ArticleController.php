@@ -11,7 +11,7 @@ use DM\ShopmodeBundle\Entity\ScrapArticles;
 class ArticleController extends Controller
   {
 
-  const ARTICLE_PAR_PAGE   = 8;
+  const ARTICLE_PAR_PAGE   = 12;
   const PATH_IMG_NOT_FOUND = "site/canard-jaune.jpg";
 
   // ========================================
@@ -21,26 +21,7 @@ class ArticleController extends Controller
    */
   public function indexAction() {
     return $this->render('article/index.html.twig', [
-          'article.'
-    ]);
-  }
-  // ------------------------
-  /**
-   * @Route("/viewbyid/{id}", name="dm_shopmode_viewById")
-   */
-  public function viewByIDAction($id) {
-    $error = "";
-
-    $article = new ScrapArticles();
-    $article = $this->findArticleById($id);
-
-    if ($article === null) {
-    $error = "Id $id non trouvé"; }
-
-    return $this->render('article/viewByID.html.twig', [
-      'error'   => $error,
-      'article' => $article,
-        ]);
+      ]);
   }
   // ------------------------
   /**
@@ -104,7 +85,7 @@ class ArticleController extends Controller
   /**
    * @Route("/viewblocklist/{cat}/{page}", name="dm_shopmode_viewBlockList")
    */
-  public function viewBlockListAction($cat, $page) {
+  public function viewBlockListAction($cat, $page=1) {
     $countCat   = $this->countCat($cat);
     $maxPage    = ceil($countCat / self::ARTICLE_PAR_PAGE);
     $indexPage  = ($page - 1) * self::ARTICLE_PAR_PAGE;
@@ -128,18 +109,6 @@ class ArticleController extends Controller
   }
   // ------------------------
   /**
-   * @Route("/count_cat/{cat}", name="dm_shopmode_countCat")
-   */
-  public function countCatAction($cat) {
-    $count = $this->countCat($cat);
-
-    return $this->render('article/count_cat.html.twig', [
-          'cat'   => $cat,
-          'count' => $count,
-    ]);
-  }
-  // ------------------------
-  /**
    * @Route("/article/{customRef}", name="dm_shopmode_article")
    */
   public function viewArticleAction($customRef) {
@@ -158,7 +127,6 @@ class ArticleController extends Controller
       'photoFileName' => $photoFileName,
     ]);
   }
-
   // ========================================
   // ========================================
   /**
@@ -278,15 +246,8 @@ class ArticleController extends Controller
       $nextPathUrl = '';
     }
 
-    $this->get('logger')
-        ->info('previous: ' . $previousPathUrl
-            . ' - next: '   . $nextPathUrl
-            . ' - max: '    . $maxPage
-        );
-
-    $paths = [
-      'previousPathUrl' => $previousPathUrl,
-      'nextPathUrl'     => $nextPathUrl,
+    $paths = [  'previousPathUrl' => $previousPathUrl,
+                'nextPathUrl'     => $nextPathUrl,
       ];
 
     return $paths;
