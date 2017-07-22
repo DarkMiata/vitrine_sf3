@@ -25,12 +25,16 @@
               
               {# boucle d'affichage des catégories dans le menu déroulant#}
               {% for categorie in cats %}
+                {# si categorie vide, alors ne pas afficher #}
+                {% if categorie.countarticles != 0 %}
                 <li>
                   <a href="{{ path('dm_shopmode_viewBlockList',
                      { 'cat': categorie.name, 'page':1 }) }}">
                     {{ categorie.name }}
+                  ({{ categorie.countarticles }})
                   </a>
                 </li>
+                {% endif %}
               {% endfor %}
               
 						</ul>

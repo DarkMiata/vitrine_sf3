@@ -24,6 +24,7 @@ class ArticleController extends Controller
       ]);
   }
   // ------------------------
+
   /**
    * @Route("/viewblockbyid/{id}", name="dm_shopmode_viewBlockByID")
    */
