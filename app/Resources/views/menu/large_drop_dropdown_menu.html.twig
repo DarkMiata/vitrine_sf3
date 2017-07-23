@@ -25,7 +25,7 @@
               
               {# boucle d'affichage des catégories dans le menu déroulant#}
               {% for categorie in cats %}
-                {# si categorie vide, alors ne pas afficher #}
+                {# si categorie vide, alors ne pas l'afficher #}
                 {% if categorie.countarticles != 0 %}
                 <li>
                   <a href="{{ path('dm_shopmode_viewBlockList',

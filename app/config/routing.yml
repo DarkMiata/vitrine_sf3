@@ -1,17 +1,13 @@
 dmdb_maintenance:
     resource: "@DMDBMaintenanceBundle/Controller/"
-    type:     annotation
     prefix: /maint/
-
-# !!! A retirer - obsolète
-#dm_shopmode:
-#    resource: "@DMShopmodeBundle/Resources/config/routing.yml"
-#    prefix:   /shop/
+    type:   annotation
 
 dm_shopmode:
     resource: "@DMShopmodeBundle/Controller/"
     prefix:   /shop/
     type: annotation
+    
 app:
     resource: '@AppBundle/Controller/'
     prefix:   /
