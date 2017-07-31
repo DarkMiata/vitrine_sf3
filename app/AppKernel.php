@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new DM\ShopmodeBundle\DMShopmodeBundle(),
             new DM\DBMaintenanceBundle\DMDBMaintenanceBundle(),
+            new DM\ScrapBundle\DMScrapBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

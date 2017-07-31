@@ -42,4 +42,15 @@ class SecurityController extends Controller
             // ...
     ));
   }
+  // ------------------------
+  /**
+   * @Route("/account", name="account")
+   */
+  public function accountAction() {
+
+    return $this->redirectToRoute('dm_shopmode_index');
+  }
+
+
+  // ========================================
   }

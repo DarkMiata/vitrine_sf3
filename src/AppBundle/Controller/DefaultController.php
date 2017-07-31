@@ -19,7 +19,7 @@ class DefaultController extends Controller
 //            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
 //        ]);
 
-    return $this->redirectToRoute('dm_shopmode_homepage');
+    return $this->redirectToRoute('dm_shopmode_index');
   }
   // ------------------------
    /**
@@ -29,4 +29,8 @@ class DefaultController extends Controller
   {
       return new Response('<html><body>Admin page!</body></html>');
   }
+
+  // ========================================
+  // ========================================
+
 }

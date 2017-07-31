@@ -1,0 +1,58 @@
+/* 
+    Created on : 31 juil. 2017, 13:44:21
+    Author     : sam
+*/
+
+.center {
+  text-align: center;
+}
+
+.left {
+  
+}
+
+.right {
+  text-align: right;
+}
+
+table {
+  margin: 20px;
+}
+
+th, tr, td, thead, tbody {
+  border: 1px solid black;
+  text-align: center;
+  padding: 20px;
+}
+
+th {
+  height: 30px;
+}
+
+td {
+  height: 25px;
+}
+
+.cart_produit {
+  width: 400px;
+}
+
+.cart_taille {
+  width: 80px;  
+}
+
+.cart_prixUnit {
+  width: 80px;
+}
+
+.cart_quantité {
+  width: 80px; 
+}
+
+.cart_prix {
+  width: 80px;
+}
+
+.cart_btnSup {
+  width: 70px; 
+}

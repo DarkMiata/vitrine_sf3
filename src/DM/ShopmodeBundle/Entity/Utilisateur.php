@@ -38,7 +38,7 @@ class Utilisateur
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="email", type="text", length=128, nullable=false)
      */
     private $email;
 

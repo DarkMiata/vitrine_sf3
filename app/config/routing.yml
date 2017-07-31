@@ -1,3 +1,8 @@
+dm_scrap:
+    resource: "@DMScrapBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 dmdb_maintenance:
     resource: "@DMDBMaintenanceBundle/Controller/"
     prefix: /maint/

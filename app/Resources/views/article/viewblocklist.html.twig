@@ -1,12 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block head %}
-  {% block title %}ShopmodeBundle - index{% endblock %}
+  {% block title %}ShopmodeBundle - Articles{% endblock %}
 {% block stylesheets %}{% endblock %}
 {% endblock %}
 
 {% block body %}
   
+  {% include 'article/paginationArticlesBS.html.twig' with 
+  { previousPathUrl:  pathUrl.previousPathUrl,
+    nextPathUrl:      pathUrl.nextPathUrl,
+    maxPage:          maxPage } %}
+      
   <div class="row">
   {% for article in articlesArray %}
 {#   {% include 'DMShopmodeBundle:Default:block_article.html.twig' with {article: article} %} #}
@@ -14,7 +19,10 @@
 
   {% endfor %}
   </div>
-  {% include 'article/pagination.html.twig' with 
+
+  {% include 'article/paginationArticlesBS.html.twig' with 
     { previousPathUrl:  pathUrl.previousPathUrl,
-      nextPathUrl:      pathUrl.nextPathUrl } %}
+      nextPathUrl:      pathUrl.nextPathUrl,
+      maxPage:          maxPage } %}
+
 {% endblock %}
