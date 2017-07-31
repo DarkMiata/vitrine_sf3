@@ -42,5 +42,34 @@
       <td id="tab_info">info</td>
     </tr>
   </table>
+        
+  
+<form action="{{ path('dm_shopmode_panierPost') }}" method="post">
+  <div class="form-group">
+    <label for="quantité">Quantité:</label>
+    <select class="form-control" id="article-quantité" name="quantité">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+    </select>
+  
+  <div class="form-group">
+    <label for="taille">Taille:</label>
+    <select class="form-control" id="article-taille" name="taille">
+      <option>xs</option>
+      <option>s</option>
+      <option>m</option>
+      <option>l</option>
+      <option>xl</option>
+    </select>
+    
+    <input type="hidden" name="ref"     value="{{ article.ref }}">
+    <input type="hidden" name="prix"    value="{{ article.prix }}">
+    <input type="hidden" name="name"    value="{{ article.name }}">
+    <input type="hidden" name="marque"  value="{{ article.marque }}">
+    
+    <button class="btn btn-primary" type="submit">Ajouter au panier</button>
+
+  </div>
   
 {% endblock %}

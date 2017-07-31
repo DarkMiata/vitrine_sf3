@@ -60,7 +60,7 @@
   {# ============================ #}
   
   {# == panier == #}
-  <div>Mon panier: {{ articleQuantity }}
+  <div><a href="{{ path('dm_shopmode_panier') }}">Mon panier: </a>{{ articleQuantity }}
   {% if articleQuantity < 2 %} article
   {% else %} articles
   {% endif %}

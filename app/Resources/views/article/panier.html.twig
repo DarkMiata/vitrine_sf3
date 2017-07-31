@@ -1,46 +1,84 @@
 {% extends "::base.html.twig" %}
 
 {% block head %}
-  {% block title %}ShopmodeBundle - viewByID - {% endblock %}
+  {% block title %}ShopmodeBundle - Panier{% endblock %}
   
   {% block stylesheets %}
     <!-- CSS BLZ -->
 {#    <link rel="stylesheet" type="text/css" href="{{asset('css/global91.css')}}">#}
+
+    <link rel="stylesheet" type="text/css" href="{{asset('css/panier.css')}}">
   {% endblock %}
   
 {% endblock %}
 
 {% block body %}
-  <h2>vue Article</h2>
+  <h2>Panier</h2>
   
   {# bouton retour à la liste #}
 {#  <a href="{{ app.session.get('returnButtonUrl') }}">
   <img src="{{ asset('images/') }}" alt="retour à la liste" />  </a>#}
   
-  <a href="{{ app.session.get('returnButtonUrl') }}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste</a>
+  <a href="{{ app.session.get('returnButtonUrl') }}" class="btn btn-sm btn-default">
+    <span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste</a>
+{#---------------------------------------#}
+<br>
 
-  <table>
+<table>
+  <thead>
     <tr>
-      <th>
-        {# photo de l'article #}
-        <img src="{{ asset('images/') }}{{ photoFileName }}" height=400px width=400px alt="" />
-      </th>
-      <th>
-        {{ article.marque }}<br>
-        {{ article.name }}<br>
-        {{ article.refsite }}<br>
-        {{ article.description }}<br>
-        {{ article.prix }}€<br>
-        ---------------<br>
-        taille:<br>
-        quantité:<br>
-        ajouter au panier<br>
-      </th>
+      <th class="center cart_produit">   Produit</th>
+      <th class="center cart_taille">    Taille</th>
+      <th class="center cart_prixUnit">  Prix unit.</th>
+      <th class="center cart_quantité">  Quantité</th>
+      <th class="center cart_prix">      Prix</th>
+      <th class="cart_btnSup"></th>
     </tr>
-    <tr>
-      <td id="views_block">3 mini photos</td>
-      <td id="tab_info">info</td>
-    </tr>
-  </table>
+  </thead>
+
+  {# liste des articles #}
+  <tbody>
+    {% set total = 0 %}
+    
+    {% for article in panier %}
+      {% if not article == null %}
+        <tr>
+          <td class="">
+            {{ article.marque }} - {{ article.name }}<br>
+            REF.: {{ article.ref }}
+          </td>
+          <td class="center">{{ article.taille }}</td>
+          <td class="center">{{ article.prix }}€</td>
+          <td class="center">{{ article.quantité }}</td>
+          <td class=""> {{ article.prix*article.quantité }}€</td>
+          <td class="center">
+            <a href="{{path('dm_shopmode_supprimeArticlePanierPost',{'token':article.token }) }}">sup</a>
+          </td>
+
+          {% set total = total + (article.prix * article.quantité) %}
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
   
+  {# variable de frais de préparation - à déplacer dans const du projet !! #}
+  {% set frais_prépa = 3.99 %}
+  {% set total = total + frais_prépa %}
+  
+  <tbody>
+    <tr>
+      <td right colspan="3">Montant des frais de préparation</td>
+      <td center colspan="3">{{ frais_prépa }}€</td>
+    </tr>
+    <tr>
+      <td right colspan="3">Montant des frais de livraison</td>
+      <td center colspan="3">Gratuit</td>
+    </tr>
+    <tr>
+      <td right colspan="3">Montant de ma commande (TTC)</td>
+      <td center colspan="3">{{ total }}€</td>
+    </tr>
+  </tbody>
+  
+</table> 
 {% endblock %}
