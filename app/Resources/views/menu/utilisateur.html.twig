@@ -1,0 +1,9 @@
+{# == affichage de l'utilisateur connecté == #}
+
+{% if is_granted('ROLE_ADMIN') %}
+  <p class="navbar-right">Admin</p>
+{% endif %}
+
+{% if is_granted('ROLE_USER') %}
+  <p class="navbar-right">Utilisateur: {{ app.user.username }}</p>
+{% endif %}

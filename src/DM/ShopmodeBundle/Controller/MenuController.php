@@ -24,7 +24,12 @@ class MenuController extends Controller
     // si utilisateur est anonyme, quantité article = 0
     if ($user == 'anon.') { $artQuant = 0; }
 
-    return $this->render('menu/large_drop_dropdown_menu.html.twig', [
+//    return $this->render('menu/large_drop_dropdown_menu.html.twig', [
+//      'cats'            => $allcats,
+//      'articleQuantity' => $artQuant,
+//    ]);
+
+    return $this->render('menu/menu_DM.html.twig', [
       'cats'            => $allcats,
       'articleQuantity' => $artQuant,
     ]);
@@ -68,8 +73,8 @@ class MenuController extends Controller
 
       }
       else {
-        $this->get('logger')->error('article trouvé dans DB: '.$countArticlesByCat
-            .' - Articles sauvegardé dans catégorie:'. $cat->getCountarticles());
+//        $this->get('logger')->error('article trouvé dans DB: '.$countArticlesByCat
+//            .' - Articles sauvegardé dans catégorie:'. $cat->getCountarticles());
 
         $cat->setCountarticles($countArticlesByCat);
 

@@ -12,11 +12,13 @@
   <!-- CSS produits -->
   <link rel="stylesheet" type="text/css" href="{{ asset('css/produit.css') }}">
   <!-- CSS menu -->
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/large_dropdown_menu.css') }}">
+{#  <link rel="stylesheet" type="text/css" href="{{ asset('css/large_dropdown_menu.css') }}">#}
   
 </head>
 <body>
-  {% include 'default/menu.html.twig' %}
+{#  {% include 'default/menu.html.twig' %} #}
+{#  {% include 'menu/menu_DM.html.twig' %} #}
+  {{ render(controller('DMShopmodeBundle:Menu:menu')) }}
   {% block body %}{% endblock %}
   {% include 'default/footer.html.twig' %}
   

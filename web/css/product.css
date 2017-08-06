@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700&subset=latin-ext,vietnamese');   
-body{font-family: 'Quicksand', sans-serif;}
+/*  body{font-family: 'Quicksand', sans-serif;}*/
    h4{
     	font-weight: 600;
 	}
-	p{
+/*	p{
 		font-size: 12px;
 		margin-top: 5px;
-	}
+	}*/
 	.price{
 		font-size: 30px;
     	margin: 0 auto;

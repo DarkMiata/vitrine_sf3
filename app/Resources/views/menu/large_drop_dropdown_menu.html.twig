@@ -1,72 +1,69 @@
-{# empty Twig template #}
-{# demande du jquery #}
 
 <nav class="navbar navbar-default navbar-static">
-    <div class="navbar-header">
-		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<!--<a class="navbar-brand" href="#">Large Dropdown Menu</a>-->
-	</div>
-	
-	
-	<div class="collapse navbar-collapse js-navbar-collapse">
-		<ul class="nav navbar-nav">
-			<li class="dropdown dropdown-large">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">Les produits<b class="caret"></b></a>
-				
-				<ul class="dropdown-menu dropdown-menu-large row">
-					<li class="col-sm-3">
-						<ul>
-							<li class="dropdown-header">Glyphicons</li>
-              
+  <div class="navbar-header">
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <!--<a class="navbar-brand" href="#">Large Dropdown Menu</a>-->
+  </div>
+
+  <div class="collapse navbar-collapse js-navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li class="dropdown dropdown-large">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Les produits<b class="caret"></b></a>
+
+        <ul class="dropdown-menu dropdown-menu-large row">
+          <li class="col-sm-3">
+            <ul>
+              <li class="dropdown-header">Glyphicons</li>
+
               {# boucle d'affichage des catégories dans le menu déroulant#}
               {% for categorie in cats %}
                 {# si categorie vide, alors ne pas l'afficher #}
                 {% if categorie.countarticles != 0 %}
-                <li>
-                  <a href="{{ path('dm_shopmode_viewBlockList',
+                  <li>
+                    <a href="{{ path('dm_shopmode_viewBlockList',
                      { 'cat': categorie.name, 'page':1 }) }}">
-                    {{ categorie.name }}
-                  ({{ categorie.countarticles }})
-                  </a>
-                </li>
+                      {{ categorie.name }}
+                      ({{ categorie.countarticles }})
+                    </a>
+                  </li>
                 {% endif %}
               {% endfor %}
-              
-						</ul>
-					</li>
-				</ul>
-       
-			</li>
-		</ul>
-  <a href="">Créer un compte</a>
-  <a href="{{ path('login') }}">S'identifier</a>
-  
-  {# https://symfony.com/doc/current/security.html #}
-  
-  {# == affichage de l'utilisateur connecté == #}
-  {# ============================ #}
-  {% if is_granted('ROLE_ADMIN') %}
-    <div>Admin</div>
-  {% endif %}
-  
-  {% if is_granted('ROLE_USER') %}
-    <div>Utilisateur: {{ app.user.username }}</div>
-  {% endif %}
-  {# ============================ #}
-  
-  {# == panier == #}
-  <div><a href="{{ path('dm_shopmode_panier') }}">Mon panier: </a>{{ articleQuantity }}
-  {% if articleQuantity < 2 %} article
-  {% else %} articles
-  {% endif %}
-  </div>
-  
-	</div><!-- /.nav-collapse -->
+
+            </ul>
+          </li>
+        </ul>
+
+      </li>
+    </ul>
+    <a href="">Créer un compte</a>
+    <a href="{{ path('login') }}">S'identifier</a>
+
+    {# https://symfony.com/doc/current/security.html #}
+
+    {# == affichage de l'utilisateur connecté == #}
+    {# ============================ #}
+    {% if is_granted('ROLE_ADMIN') %}
+      <div>Admin</div>
+    {% endif %}
+
+    {% if is_granted('ROLE_USER') %}
+      <div>Utilisateur: {{ app.user.username }}</div>
+    {% endif %}
+    {# ============================ #}
+
+    {# == panier == #}
+    <div><a href="{{ path('dm_shopmode_panier') }}">Mon panier: </a>{{ articleQuantity }}
+      {% if articleQuantity < 2 %} article
+      {% else %} articles
+      {% endif %}
+    </div>
+
+  </div><!-- /.nav-collapse -->
 
 </nav>
 
