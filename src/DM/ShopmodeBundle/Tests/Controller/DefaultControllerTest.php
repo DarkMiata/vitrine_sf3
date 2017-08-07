@@ -6,12 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    public function testTest()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
-
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $crawler = $client->request('GET', '/test');
     }
+
+    public function testList()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/list');
+    }
+
 }

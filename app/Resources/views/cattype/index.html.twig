@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Cattypes list</h1>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Ordre</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for catType in catTypes %}
+            <tr>
+                <td><a href="{{ path('cattype_show', { 'id': catType.id }) }}">{{ catType.id }}</a></td>
+                <td>{{ catType.nom }}</td>
+                <td>{{ catType.ordre }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('cattype_show', { 'id': catType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('cattype_edit', { 'id': catType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cattype_new') }}">Create a new catType</a>
+        </li>
+    </ul>
+{% endblock %}

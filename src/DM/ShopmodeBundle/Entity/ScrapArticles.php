@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ScrapArticles
  *
- * @ORM\Table(name="scrap_articles", uniqueConstraints={@ORM\UniqueConstraint(name="Index 2", columns={"name"})})
+ * @ORM\Table(name="scrap_articles", uniqueConstraints={@ORM\UniqueConstraint(name="Index_2", columns={"name"})})
  * @ORM\Entity
  */
 class ScrapArticles

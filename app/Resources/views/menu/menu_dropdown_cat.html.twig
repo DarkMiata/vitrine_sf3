@@ -1,30 +1,23 @@
 {# Menu déroulant des catégories #}
 
 <ul class="nav navbar-nav navbar-font-dropdown">
-  <li class="dropdown dropdown-large">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Les produits<span class="caret"></span>
-
-      <ul class="dropdown-menu dropdown-menu-large row">
-        <li class="col-sm-3">
-          <ul>
-            <li class="dropdown-header">Glyphicons</li>
-
-            {# boucle d'affichage des catégories dans le menu déroulant#}
-            {% for categorie in cats %}
-              {# si categorie vide, alors ne pas l'afficher #}
-              {% if categorie.countarticles != 0 %}
+  {# Boucle d'affichage des menus déroulants catégories #}
+  {% for catType in menu %}
+    <li class="dropdown dropdown-large">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ catType.catTypeName }}<span class="caret"></span>
+        <ul class="dropdown-menu dropdown-menu-large row">
+          <li class="col-sm-3">
+            <ul>
+              {# Pour chaque catégorie, afficher les articles (chemises, etc) #}
+              {% for cat in catType.cats %}
                 <li>
                   <a href="{{ path('dm_shopmode_viewBlockList',
-                     { 'cat': categorie.name, 'page':1 }) }}">
-                    {{ categorie.name }}
-                    ({{ categorie.countarticles }})
-                  </a>
+                     { 'cat': cat.name, 'page':1 }) }}">{{ cat.name }}</a>
                 </li>
-              {% endif %}
-            {% endfor %}
-
-          </ul>
-        </li>
-      </ul>
-  </li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+    </li>
+  {% endfor %}
 </ul>

@@ -18,7 +18,7 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="countarticles" type="smallint" column="countArticles" nullable="false">
+    <field name="countarticles" type="smallint" column="count_articles" nullable="false">
       <options>
         <option name="unsigned">1</option>
       </options>

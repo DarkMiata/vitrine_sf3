@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use DM\ShopmodeBundle\Entity\ScrapCategories;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // Custom services
-use DM\ScrapBundle\Service\Files;
+//use DM\ScrapBundle\Service\Files;
 // Permet d'utiliser Doctrine dans la command console
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 

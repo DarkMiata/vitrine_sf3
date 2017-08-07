@@ -32,30 +32,6 @@ class ArticleController extends Controller
   }
   // ------------------------
   /**
-   * @Route("/viewblockbyid/{id}", name="dm_shopmode_viewBlockByID")
-   */
-  public function viewBlockByIDAction($id) {
-
-    $em = $this->getDoctrine()->getManager();
-
-    $article = $em->getRepository('DMShopmodeBundle:ScrapArticles')
-        ->findOneBy(['id' => $id]);
-
-    if ($article === NULL) {
-      throw new Exception("view block by id, id $id non trouvé");
-    }
-
-    $photo = new \DM\ShopmodeBundle\Entity\BlzPhotos;
-
-    $photo = $this->findPhotoByRef($article->getref());
-
-    return $this->render('article/block_article.html.twig', [
-          'article' => $article,
-          'photo'   => $photo
-    ]);
-  }
-  // ------------------------
-  /**
    * @Route("/articles/{cat}/{page}", name="dm_shopmode_viewBlockList")
    */
   public function viewBlockListAction($cat, $page = 1, Request $req) {

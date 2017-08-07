@@ -3,12 +3,11 @@
 namespace DM\ShopmodeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine;
 
 /**
  * ScrapCategories
  *
- * @ORM\Table(name="scrap_categories", uniqueConstraints={@ORM\UniqueConstraint(name="Index 2", columns={"name"}), @ORM\UniqueConstraint(name="Index 3", columns={"url"})})
+ * @ORM\Table(name="scrap_categories", uniqueConstraints={@ORM\UniqueConstraint(name="Index_2", columns={"name"}), @ORM\UniqueConstraint(name="Index_3", columns={"url"})})
  * @ORM\Entity
  */
 class ScrapCategories
@@ -39,9 +38,9 @@ class ScrapCategories
     /**
      * @var integer
      *
-     * @ORM\Column(name="countArticles", type="smallint", nullable=false)
+     * @ORM\Column(name="count_articles", type="smallint", nullable=false)
      */
-    private $countarticles;
+    private $countArticles;
 
     /**
      * @var string
@@ -50,6 +49,12 @@ class ScrapCategories
      */
     private $scan;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cattype_id", type="integer", nullable=true)
+     */
+    private $catTypeId;
 
 
     /**
@@ -111,27 +116,27 @@ class ScrapCategories
     }
 
     /**
-     * Set countarticles
+     * Set countArticles
      *
      * @param integer $countarticles
      *
      * @return ScrapCategories
      */
-    public function setCountarticles($countarticles)
+    public function setCountArticles($countArticles)
     {
-        $this->countarticles = $countarticles;
+        $this->countArticles = $countArticles;
 
         return $this;
     }
 
     /**
-     * Get countarticles
+     * Get countArticles
      *
      * @return integer
      */
-    public function getCountarticles()
+    public function getCountArticles()
     {
-        return $this->countarticles;
+        return $this->countArticles;
     }
 
     /**
@@ -157,6 +162,16 @@ class ScrapCategories
     {
         return $this->scan;
     }
+
+
+    function getCatTypeId() {
+      return $this->catTypeId;
+    }
+
+     function setCatTypeId($cattype_id) {
+      $this->catTypeId = $cattype_id;
+    }
+
 
   // ========================================
   // ========================================

@@ -1,3 +1,7 @@
+dm_shopmode_cat_type:
+    resource: "@DMShopmodeBundle/Controller/CatTypeController.php"
+    type:     annotation
+
 dmdb_maintenance:
     resource: "@DMDBMaintenanceBundle/Controller/"
     prefix: /maint/

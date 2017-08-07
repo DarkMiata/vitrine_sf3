@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}DMShopmodeBundle:Default:test Custom Repo{% endblock %}
+
+{% block body %}
+  
+  <h1>Welcome to the Default:test custom repo</h1>
+  <br>
+  {% for catType in catTypes %}
+    {{ catType.id }} - {{ catType.nom }} - {{ catType.ordre }}<br>
+    
+  {% endfor %}
+
+{% endblock %}

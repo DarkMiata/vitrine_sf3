@@ -4,8 +4,10 @@ namespace DM\ShopmodeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use DM\ShopmodeBundle\Entity\ScrapCategories;
 use DM\ShopmodeBundle\Entity\ScrapArticles;
+use DM\ShopmodeBundle\Entity\CatType;
 
 /*
  * Génération du menu - affichage des catégories.
@@ -14,7 +16,20 @@ use DM\ShopmodeBundle\Entity\ScrapArticles;
 class MenuController extends Controller
 {
   public function menuAction() {
-    $allcats = $this->findAllCategories();
+    $catTypes = $this->getDoctrine()->getRepository(CatType::class)
+    ->findAllOrderedByOrdre();
+
+    foreach ($catTypes as $catType) {
+      $catTypeId = $catType->getId();
+
+      $categories = $this->getDoctrine()->getRepository(ScrapCategories::class)
+          ->findByCatTypeId($catTypeId);
+
+      $menu[] = array(
+        'catTypeName' => $catType->getNom(),
+        'cats'        => $categories
+      );
+    }
 
     $user = $this->get('security.token_storage')->getToken()->getUser();
 
@@ -24,16 +39,28 @@ class MenuController extends Controller
     // si utilisateur est anonyme, quantité article = 0
     if ($user == 'anon.') { $artQuant = 0; }
 
-//    return $this->render('menu/large_drop_dropdown_menu.html.twig', [
-//      'cats'            => $allcats,
-//      'articleQuantity' => $artQuant,
-//    ]);
-
     return $this->render('menu/menu_DM.html.twig', [
-      'cats'            => $allcats,
+      'menu'            => $menu,
       'articleQuantity' => $artQuant,
     ]);
   }
+  // ------------------------
+//  public function menuAction() {
+//    $allcats = $this->findAllCategories();
+//
+//    $user = $this->get('security.token_storage')->getToken()->getUser();
+//
+//    // !!! temporaire, test d'affichage 10 articles dans panier
+//    $artQuant = 10;
+//
+//    // si utilisateur est anonyme, quantité article = 0
+//    if ($user == 'anon.') { $artQuant = 0; }
+//
+//    return $this->render('menu/menu_DM.html.twig', [
+//      'cats'            => $allcats,
+//      'articleQuantity' => $artQuant,
+//    ]);
+//  }
 // ========================================
 // ========================================
   private function generateWebspage() {
@@ -69,14 +96,14 @@ class MenuController extends Controller
           ->getQuery()
           ->getSingleScalarResult();
 
-      if ($countArticlesByCat === $cat->getCountarticles()) {
+      if ($countArticlesByCat === $cat->getCountArticles()) {
 
       }
       else {
 //        $this->get('logger')->error('article trouvé dans DB: '.$countArticlesByCat
 //            .' - Articles sauvegardé dans catégorie:'. $cat->getCountarticles());
 
-        $cat->setCountarticles($countArticlesByCat);
+        $cat->setCountArticles($countArticlesByCat);
 
       }
     }
