@@ -5,12 +5,12 @@ namespace DM\ShopmodeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ScrapCategories
+ * ArticlesCategories
  *
- * @ORM\Table(name="scrap_categories", uniqueConstraints={@ORM\UniqueConstraint(name="Index_2", columns={"name"}), @ORM\UniqueConstraint(name="Index_3", columns={"url"})})
+ * @ORM\Table(name="articles_categories", uniqueConstraints={@ORM\UniqueConstraint(name="Index_2", columns={"name"}), @ORM\UniqueConstraint(name="Index_3", columns={"url"})})
  * @ORM\Entity
  */
-class ScrapCategories
+class ArticlesCategories
 {
     /**
      * @var integer
@@ -72,7 +72,7 @@ class ScrapCategories
      *
      * @param string $name
      *
-     * @return ScrapCategories
+     * @return ArticlesCategories
      */
     public function setName($name)
     {
@@ -96,7 +96,7 @@ class ScrapCategories
      *
      * @param string $url
      *
-     * @return ScrapCategories
+     * @return ArticlesCategories
      */
     public function setUrl($url)
     {
@@ -120,7 +120,7 @@ class ScrapCategories
      *
      * @param integer $countarticles
      *
-     * @return ScrapCategories
+     * @return ArticlesCategories
      */
     public function setCountArticles($countArticles)
     {
@@ -144,7 +144,7 @@ class ScrapCategories
      *
      * @param string $scan
      *
-     * @return ScrapCategories
+     * @return ArticlesCategories
      */
     public function setScan($scan)
     {

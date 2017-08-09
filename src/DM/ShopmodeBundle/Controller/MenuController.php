@@ -5,8 +5,8 @@ namespace DM\ShopmodeBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use DM\ShopmodeBundle\Entity\ScrapCategories;
-use DM\ShopmodeBundle\Entity\ScrapArticles;
+use DM\ShopmodeBundle\Entity\ArticlesCategories;
+use DM\ShopmodeBundle\Entity\Articles;
 use DM\ShopmodeBundle\Entity\CatType;
 
 /*
@@ -22,7 +22,7 @@ class MenuController extends Controller
     foreach ($catTypes as $catType) {
       $catTypeId = $catType->getId();
 
-      $categories = $this->getDoctrine()->getRepository(ScrapCategories::class)
+      $categories = $this->getDoctrine()->getRepository(ArticlesCategories::class)
           ->findByCatTypeId($catTypeId);
 
       $menu[] = array(
@@ -82,7 +82,7 @@ class MenuController extends Controller
   private function controlCountCategories(array $cats) {
     foreach ($cats as $cat) {
       $em         = $this->getDoctrine()->getManager();
-      $repository = $em->getRepository('DMShopmodeBundle:ScrapArticles');
+      $repository = $em->getRepository('DMShopmodeBundle:Articles');
 
       //var_dump($cat);
 

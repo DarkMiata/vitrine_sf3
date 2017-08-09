@@ -10,7 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use DM\ShopmodeBundle\Entity\CatType;
-use DM\ShopmodeBundle\Entity\ScrapCategories;
+use DM\ShopmodeBundle\Entity\ArticlesCategories;
+use AppBundle\Controller\SessionController;
+
+use AppBundle\Service;
 
 class DefaultController extends Controller
   {
@@ -18,27 +21,17 @@ class DefaultController extends Controller
    * @Route("/test")
    */
   public function testAction() {
-    $catTypes = $this->getDoctrine()->getRepository(CatType::class)
-        ->findAllOrderedByOrdre();
+    $text = "essai text";
 
-    foreach ($catTypes as $catType) {
-      $catTypeId = $catType->getId();
+    $testService = $this->container->get(Service\TestService::class);
 
-      $categories = $this->getDoctrine()->getRepository(ScrapCategories::class)
-          ->findByCatTypeId($catTypeId);
-
-      $menu[] = array(
-        'catTypeName' => $catType->getNom(),
-        'cats'        => $categories
-      );
-    }
-
-    var_dump($menu);
+    $testService->testServiceAction();
 
     return $this->render('DMShopmodeBundle:Default:test.html.twig', [
-          'menu' => $menu,
+       'text' => $text,
     ]);
   }
+  // ------------------------
   /**
    * @Route("/testcustomrepo")
    */
@@ -51,5 +44,8 @@ class DefaultController extends Controller
           'catTypes' => $catTypes,
     ));
   }
+  // ------------------------
+
+
 // ========================================
 }

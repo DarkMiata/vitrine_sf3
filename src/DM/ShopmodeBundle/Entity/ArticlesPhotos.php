@@ -5,11 +5,11 @@ namespace DM\ShopmodeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BlzPhotos
+ * ArticlesPhotos
  *
  * @ORM\Entity
  */
-class BlzPhotos
+class ArticlesPhotos
 {
     /**
      * @var integer
@@ -51,7 +51,7 @@ class BlzPhotos
      *
      * @param integer $refArticle
      *
-     * @return BlzPhotos
+     * @return ArticlesPhotos
      */
     public function setRefArticle($refArticle)
     {
@@ -75,7 +75,7 @@ class BlzPhotos
      *
      * @param string $fileName
      *
-     * @return BlzPhotos
+     * @return ArticlesPhotos
      */
     public function setFileName($fileName)
     {

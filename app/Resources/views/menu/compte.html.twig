@@ -1,0 +1,48 @@
+{#
+navbar menu 'login' compte
+https://bootsnipp.com/snippets/featured/fancy-navbar-login-sign-in-form
+#}
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Mon compte</b> <span class="caret"></span></a>
+  <ul id="login-dp" class="dropdown-menu">
+    <li>
+      <div class="row">
+        <div class="col-md-12">
+          Se connecter via
+          <div class="social-buttons">
+            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+          </div>
+          or
+          <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+            <div class="form-group">
+              <label class="sr-only" for="exampleInputEmail2">Adresse Email</label>
+              <input type="text" class="form-control" id="_username" {#value="{{ last_username }}"#} placeholder="Utilisateur" required>
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="password">mot de passe</label>
+              <input type="password" class="form-control" id="password" name="_password" placeholder="Password" required>
+              <input type="hidden" name="_target_path" value="/account" />
+              {#
+              If you want to control the URL the user
+              is redirected to on success (more details below)
+              <input type="hidden" name="_target_path" value="/account" />
+              #}
+              <div class="help-block text-right"><a href="">Mot de passe oublié ?</a></div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Rester connecté
+              </label>
+            </div>
+          </form>
+        </div>
+        <div class="bottom text-center">
+          Nouveau ? <a href="#"><b>Créez votre compte</b></a>
+        </div>
+      </div>
+    </li>
+  </ul>

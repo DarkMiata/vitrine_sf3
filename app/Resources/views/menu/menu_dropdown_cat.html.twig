@@ -10,7 +10,7 @@
             <ul>
               {# Pour chaque catégorie, afficher les articles (chemises, etc) #}
               {% for cat in catType.cats %}
-                <li>
+                <li class="dropdown-menu-cat">
                   <a href="{{ path('dm_shopmode_viewBlockList',
                      { 'cat': cat.name, 'page':1 }) }}">{{ cat.name }}</a>
                 </li>

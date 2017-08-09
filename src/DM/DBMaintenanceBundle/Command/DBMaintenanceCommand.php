@@ -5,7 +5,7 @@ namespace DM\DBMaintenanceBundle\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use DM\ShopmodeBundle\Entity\ScrapCategories;
+use DM\ShopmodeBundle\Entity\ArticlesCategories;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // Custom services
 //use DM\ScrapBundle\Service\Files;
@@ -85,7 +85,7 @@ class DBMaintenanceCommand extends ContainerAwareCommand
     $doctrine = $this->getContainer()->get('doctrine');
     $em = $doctrine->getEntityManager();
 
-    $repository = $em->getRepository('DMShopmodeBundle:ScrapArticles');
+    $repository = $em->getRepository('DMShopmodeBundle:Articles');
 
     $count = $repository
         ->createQueryBuilder('a')

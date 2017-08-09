@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
-use DM\ShopmodeBundle\Entity\ScrapArticles;
+use DM\ShopmodeBundle\Entity\Articles;
 
 
 class ArticleController extends Controller
@@ -72,7 +72,7 @@ class ArticleController extends Controller
 
     $em = $this->getDoctrine()->getManager();
 
-    $article = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+    $article = $em->getRepository('DMShopmodeBundle:Articles')
         ->findOneBy(array('ref' => $ref));
 
     $photoFileName = $this->findPhotoByRef($ref)->getFileName();
@@ -163,7 +163,7 @@ class ArticleController extends Controller
   private function findPhotoByRef($ref) {
     $em = $this->getDoctrine()->getManager();
 
-    $photo = $em->getRepository('DMShopmodeBundle:BlzPhotos')
+    $photo = $em->getRepository('DMShopmodeBundle:ArticlesPhotos')
         ->findOneBy(array('refArticle' => $ref));
 
     //var_dump($photo);
@@ -180,7 +180,7 @@ class ArticleController extends Controller
   private function findArticleById($id) {
     $em = $this->getDoctrine()->getManager();
 
-    $article = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+    $article = $em->getRepository('DMShopmodeBundle:Articles')
         ->findOneBy(array('id' => $id));
 
 //    if ($article === NULL) {
@@ -193,7 +193,7 @@ class ArticleController extends Controller
   private function countCat(string $cat) {
     $em = $this->getDoctrine()->getManager();
 
-    $repository = $em->getRepository('DMShopmodeBundle:ScrapArticles');
+    $repository = $em->getRepository('DMShopmodeBundle:Articles');
 
     $count = $repository
         ->createQueryBuilder('a')
@@ -209,7 +209,7 @@ class ArticleController extends Controller
   private function getArticleFromDB($categorie, $indexPage) {
     $em = $this->getDoctrine()->getManager();
 
-    $articles = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+    $articles = $em->getRepository('DMShopmodeBundle:Articles')
         ->findby(
         ['catName' => $categorie],
             ['id' => 'asc'],
@@ -223,7 +223,7 @@ class ArticleController extends Controller
   private function findArticlesByPage($indexPage, $catName) {
     $em = $this->getDoctrine()->getManager();
 
-    $articles = $em->getRepository('DMShopmodeBundle:ScrapArticles')
+    $articles = $em->getRepository('DMShopmodeBundle:Articles')
         ->findby(
         ['catName' => $catName],
             ['id' => 'asc'],

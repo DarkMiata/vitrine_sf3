@@ -5,12 +5,12 @@ namespace DM\ShopmodeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ScrapArticles
+ * Articles
  *
- * @ORM\Table(name="scrap_articles", uniqueConstraints={@ORM\UniqueConstraint(name="Index_2", columns={"name"})})
+ * @ORM\Table(name="articles", uniqueConstraints={@ORM\UniqueConstraint(name="Index_2", columns={"name"})})
  * @ORM\Entity
  */
-class ScrapArticles
+class Articles
 {
     /**
      * @var integer
@@ -102,7 +102,7 @@ class ScrapArticles
      *
      * @param string $name
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setName($name)
     {
@@ -126,7 +126,7 @@ class ScrapArticles
      *
      * @param string $url
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setUrl($url)
     {
@@ -150,7 +150,7 @@ class ScrapArticles
      *
      * @param string $description
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setDescription($description)
     {
@@ -174,7 +174,7 @@ class ScrapArticles
      *
      * @param integer $ref
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setRef($ref)
     {
@@ -198,7 +198,7 @@ class ScrapArticles
      *
      * @param string $refsite
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setRefsite($refsite)
     {
@@ -222,7 +222,7 @@ class ScrapArticles
      *
      * @param string $marque
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setMarque($marque)
     {
@@ -246,7 +246,7 @@ class ScrapArticles
      *
      * @param float $prix
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setPrix($prix)
     {
@@ -270,7 +270,7 @@ class ScrapArticles
      *
      * @param integer $categorieId
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setCategorieId($categorieId)
     {
@@ -294,7 +294,7 @@ class ScrapArticles
      *
      * @param string $catName
      *
-     * @return ScrapArticles
+     * @return Articles
      */
     public function setCatName($catName)
     {
@@ -323,5 +323,4 @@ class ScrapArticles
 
 
 }
-
 
