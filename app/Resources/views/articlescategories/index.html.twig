@@ -1,0 +1,43 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <h1>Articlescategories list</h1>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Countarticles</th>
+                <th>Cattypeid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for articlesCategory in articlesCategories %}
+            <tr>
+                <td><a href="{{ path('articlescategories_show', { 'id': articlesCategory.id }) }}">{{ articlesCategory.id }}</a></td>
+                <td>{{ articlesCategory.name }}</td>
+                <td>{{ articlesCategory.countArticles }}</td>
+                <td>{{ articlesCategory.catTypeId }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('articlescategories_show', { 'id': articlesCategory.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('articlescategories_edit', { 'id': articlesCategory.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('articlescategories_new') }}">Create a new articlesCategory</a>
+        </li>
+    </ul>
+{% endblock %}

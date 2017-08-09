@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use DM\ShopmodeBundle\Entity\Articles;
 
 
-class ArticleController extends Controller
+class ShopController extends Controller
   {
 
   const ARTICLE_PAR_PAGE   = 16;

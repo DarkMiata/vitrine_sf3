@@ -1,0 +1,41 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+    <h1>Articlesphotos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Refarticle</th>
+                <th>Filename</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for articlesPhoto in articlesPhotos %}
+            <tr>
+                <td><a href="{{ path('articlesphotos_show', { 'id': articlesPhoto.id }) }}">{{ articlesPhoto.id }}</a></td>
+                <td>{{ articlesPhoto.refArticle }}</td>
+                <td>{{ articlesPhoto.fileName }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('articlesphotos_show', { 'id': articlesPhoto.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('articlesphotos_edit', { 'id': articlesPhoto.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('articlesphotos_new') }}">Create a new articlesPhoto</a>
+        </li>
+    </ul>
+{% endblock %}

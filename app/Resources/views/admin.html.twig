@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+  {% block stylesheets %}{% endblock %}
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+  
+<!-- Bootstrap -->  
+{% include 'bootstrap/bootstrap_stylesheets.html' %}
+
+  <!-- CSS menu -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/navbar.css') }}">
+  {#-- CSS menu compte --#}
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/menu_compte.css') }}">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  {#-- CSS Menu --#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/menu.css') }}">
+  
+</head>
+<body>
+  {% include 'menu/menu_admin.html.twig' %}
+  {% block body %}{% endblock %}
+  {% include 'default/footer.html.twig' %}
+  
+{% block javascripts %}{% endblock %}
+<!-- Bootstrap javascript -->  
+{% include 'bootstrap/bootstrap_javascripts.html' %}
+</body>
+</html>

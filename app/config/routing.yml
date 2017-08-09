@@ -1,3 +1,11 @@
+dm_shopmode_articles:
+    resource: "@DMShopmodeBundle/Controller/ArticlesController.php"
+    type:     annotation
+
+dm_shopmode_articles_categories:
+    resource: "@DMShopmodeBundle/Controller/ArticlesCategoriesController.php"
+    type:     annotation
+
 dm_shopmode_cat_type:
     resource: "@DMShopmodeBundle/Controller/CatTypeController.php"
     type:     annotation
@@ -8,7 +16,7 @@ dmdb_maintenance:
     type:   annotation
 
 dm_shopmode:
-    resource: "@DMShopmodeBundle/Controller/"
+    resource: "@DMShopmodeBundle/Controller/ShopController.php"
     prefix:   /shop/
     type: annotation
     

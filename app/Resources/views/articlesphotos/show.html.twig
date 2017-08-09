@@ -1,31 +1,31 @@
 {% extends 'admin.html.twig' %}
 
 {% block body %}
-    <h1>Cattype</h1>
+    <h1>Articlesphoto</h1>
 
-    <table class="table table-striped table-bordered">
-        <tbody class="table table-striped">
+    <table>
+        <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ catType.id }}</td>
+                <td>{{ articlesPhoto.id }}</td>
             </tr>
             <tr>
-                <th>Nom</th>
-                <td>{{ catType.nom }}</td>
+                <th>Refarticle</th>
+                <td>{{ articlesPhoto.refArticle }}</td>
             </tr>
             <tr>
-                <th>Ordre</th>
-                <td>{{ catType.ordre }}</td>
+                <th>Filename</th>
+                <td>{{ articlesPhoto.fileName }}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('cattype_index') }}">Back to the list</a>
+            <a href="{{ path('articlesphotos_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('cattype_edit', { 'id': catType.id }) }}">Edit</a>
+            <a href="{{ path('articlesphotos_edit', { 'id': articlesPhoto.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
