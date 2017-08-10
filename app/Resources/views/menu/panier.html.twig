@@ -1,7 +1,7 @@
 {# == panier == #}
 
 {% block panier %}
-  <div class="navbar-right"><a href="{{ path('dm_shopmode_panier') }}">Mon panier: </a>{{ articleQuantity }}
+  <div class="navbar-right"><a href="{{ path('dm_shopmode_panier') }}" class="navbar-font">Mon panier: </a><br>{{ articleQuantity }}
     {% if articleQuantity < 2 %} article
     {% else %} articles
     {% endif %}

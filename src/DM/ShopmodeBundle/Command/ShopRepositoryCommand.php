@@ -46,7 +46,6 @@ class ShopRepositoryCommand extends ContainerAwareCommand
 //        ->getrepository('DMShopmodeBundle:CatType')
 //        ->findAllOrderedByOrdre();
 
-    var_dump($catTypes);
   }
   // ------------------------
   private function echln($text) {

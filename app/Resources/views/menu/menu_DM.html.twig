@@ -16,22 +16,22 @@
 {#    {% include 'menu/menu_dropdown_marque.html.twig' %}#}
 
     <ul class="navbar-right col-sm-5">
-      <li class="col-sm-6">
+      <li class="col-sm-4">
         {% include 'menu/compte.html.twig' %}      
       </li>
       
-      <li class="col-sm-2">
-        {# s'enregistrer - s'identifier #}
+      <li class="col-sm-4">
+        <!-- s'enregistrer - s'identifier #} -->
         {% include 'menu/login.html.twig' %}
       </li>
 
-      <li class="col-sm-2">
-        {# == affichage de l'utilisateur connecté == #}
+{#      <li class="col-sm-3">
+        <!-- == affichage de l'utilisateur connecté ==  -->
         {% include 'menu/utilisateur.html.twig' %}
-      </li>
+      </li#}
 
-      <li class="col-sm-2">
-        {# == panier == #}
+      <li class="col-sm-4">
+        <!-- == panier == -->
         {% include 'menu/panier.html.twig' %}
       </li>
     </ul>

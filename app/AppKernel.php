@@ -18,7 +18,9 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new DM\ShopmodeBundle\DMShopmodeBundle(),
             new DM\DBMaintenanceBundle\DMDBMaintenanceBundle(),
-        ];
+            new DM\UserBundle\DMUserBundle(),
+            new \FOS\UserBundle\FOSUserBundle(),
+          ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

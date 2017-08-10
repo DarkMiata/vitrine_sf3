@@ -3,11 +3,11 @@
 <ul class="nav navbar-nav navbar-font-dropdown">
   {# Boucle d'affichage des menus déroulants catégories #}
   {% for catType in menu %}
-    <li class="dropdown dropdown-large">
+    <li class="dropdown dropdown-large separate-vertical">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ catType.catTypeName }}<span class="caret"></span>
         <ul class="dropdown-menu dropdown-menu-large row">
-          <li class="col-sm-3">
-            <ul>
+{#          <li class="col-sm-3">
+            <ul>#}
               {# Pour chaque catégorie, afficher les articles (chemises, etc) #}
               {% for cat in catType.cats %}
                 <li class="dropdown-menu-cat">
@@ -15,8 +15,8 @@
                      { 'cat': cat.name, 'page':1 }) }}">{{ cat.name }}</a>
                 </li>
               {% endfor %}
-            </ul>
-          </li>
+{#            </ul>
+          </li>#}
         </ul>
     </li>
   {% endfor %}

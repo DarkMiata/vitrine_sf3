@@ -2,8 +2,7 @@
 navbar menu 'login' compte
 https://bootsnipp.com/snippets/featured/fancy-navbar-login-sign-in-form
 #}
-
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Mon compte</b> <span class="caret"></span></a>
+<a href="#" class="dropdown-toggle dropdown-menu-cat navbar-font" data-toggle="dropdown"><b>Mon compte</b> <span class="caret"></span></a>
   <ul id="login-dp" class="dropdown-menu">
     <li>
       <div class="row">
@@ -14,10 +13,11 @@ https://bootsnipp.com/snippets/featured/fancy-navbar-login-sign-in-form
             <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
           </div>
           or
-          <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+{#          <form class="form" role="form" method="post" action="{{ path('login') }}" accept-charset="UTF-8" id="login-nav">#}
+          <form class="form" role="form" method="post" action="{{ path('fos_user_security_login') }}" accept-charset="UTF-8" id="login-nav">           
             <div class="form-group">
               <label class="sr-only" for="exampleInputEmail2">Adresse Email</label>
-              <input type="text" class="form-control" id="_username" {#value="{{ last_username }}"#} placeholder="Utilisateur" required>
+              <input type="text" class="form-control" id="username" name="_username" {#value="{{ last_username }}"#} placeholder="Utilisateur" required>
             </div>
             <div class="form-group">
               <label class="sr-only" for="password">mot de passe</label>
@@ -41,7 +41,7 @@ https://bootsnipp.com/snippets/featured/fancy-navbar-login-sign-in-form
           </form>
         </div>
         <div class="bottom text-center">
-          Nouveau ? <a href="#"><b>Créez votre compte</b></a>
+          Nouveau ? <a href="{{ path('fos_user_registration_register') }}"><b>Créez votre compte</b></a>
         </div>
       </div>
     </li>

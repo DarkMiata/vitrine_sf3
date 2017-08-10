@@ -8,4 +8,10 @@ and open the template in the editor.
     Author     : sam
 */
 
-.dropdown-menu-cat { min-width: 180px }
+.dropdown-menu-cat { min-width: 180px; }
+
+ul {
+  list-style-type: none;
+  font-family: 'Lato', sans-serif;
+}
+
