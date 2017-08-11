@@ -13,10 +13,29 @@ use DM\ShopmodeBundle\Entity\CatType;
  * Génération du menu - affichage des catégories.
  */
 
-class MenuController extends Controller
+class NavbarController extends Controller
 {
-  public function menuAction() {
-    $catTypes = $this->getDoctrine()->getRepository(CatType::class)
+  // Génération de la navbar.
+  public function NavbarAction() {
+    $menu = $this->CategoriesMenuDropdown();
+
+    $user = $this->get('security.token_storage')->getToken()->getUser();
+
+    $artQuant = 0;
+
+    // si utilisateur est anonyme, quantité article = 0
+    if ($user == 'anon.') { $artQuant = 0; }
+
+    return $this->render('navbar/shop_navbar.html.twig', [
+      'menu'            => $menu,
+      'articleQuantity' => $artQuant,
+      'user'            => $user,
+    ]);
+  }
+  // ------------------------
+  // Génération de la dropdown des catégories
+  private function CategoriesMenuDropdown() {
+      $catTypes = $this->getDoctrine()->getRepository(CatType::class)
     ->findAllOrderedByOrdre();
 
     foreach ($catTypes as $catType) {
@@ -31,42 +50,11 @@ class MenuController extends Controller
       );
     }
 
-    $user = $this->get('security.token_storage')->getToken()->getUser();
-
-    // !!! temporaire, test d'affichage 10 articles dans panier
-    $artQuant = 10;
-
-    // si utilisateur est anonyme, quantité article = 0
-    if ($user == 'anon.') { $artQuant = 0; }
-
-    return $this->render('menu/menu_DM.html.twig', [
-      'menu'            => $menu,
-      'articleQuantity' => $artQuant,
-    ]);
+    return $menu;
   }
-  // ------------------------
-//  public function menuAction() {
-//    $allcats = $this->findAllCategories();
-//
-//    $user = $this->get('security.token_storage')->getToken()->getUser();
-//
-//    // !!! temporaire, test d'affichage 10 articles dans panier
-//    $artQuant = 10;
-//
-//    // si utilisateur est anonyme, quantité article = 0
-//    if ($user == 'anon.') { $artQuant = 0; }
-//
-//    return $this->render('menu/menu_DM.html.twig', [
-//      'cats'            => $allcats,
-//      'articleQuantity' => $artQuant,
-//    ]);
-//  }
 // ========================================
 // ========================================
-  private function generateWebspage() {
-  }
 
-  // ------------------------
   // Renvoi la liste de toutes les catégories
   private function findAllCategories() {
     $em = $this->getDoctrine()->getManager();

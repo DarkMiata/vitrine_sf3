@@ -1,0 +1,34 @@
+{# empty Twig template #}
+{# auteur: Samuel Vermeulen #}
+{# date: 05/08/2017 #}
+
+<nav class="navbar navbar-default navbar-static">
+  <div class="navbar-header">
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+    <!--<a class="navbar-brand" href="#">Large Dropdown Menu</a>-->
+  </div>
+
+  <div class="collapse navbar-collapse js-navbar-collapse">
+
+    {% include 'navbar/shop_menu_dropdown_cat.html.twig' %}
+
+    <ul class="navbar-right col-sm-3">
+      
+      {% if not is_granted('ROLE_USER') %}
+        <li class="col-sm-6">
+          {% include 'navbar/compte.html.twig' %}      
+        </li>
+      {% endif %}
+
+      <li class="col-sm-6">
+        <!-- == panier == -->
+        {% include 'navbar/panier.html.twig' %}
+      </li>
+    </ul>
+
+  </div><!-- /.nav-collapse -->
+
+</nav>
+

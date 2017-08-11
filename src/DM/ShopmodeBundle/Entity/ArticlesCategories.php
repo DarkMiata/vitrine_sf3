@@ -43,13 +43,6 @@ class ArticlesCategories
     private $countArticles;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="scan", type="text", length=255, nullable=true)
-     */
-    private $scan;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="cattype_id", type="integer", nullable=true)
