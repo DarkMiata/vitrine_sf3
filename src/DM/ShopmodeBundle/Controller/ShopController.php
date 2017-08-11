@@ -150,13 +150,21 @@ class ShopController extends Controller
   // Sauvegarde la page actuel  en session pour le bouton retour de la vue article.
   private function sessionInfoPageSave($req, $cat, $page) {
 
+    // Désactivé en attendant correction bug
+    // Bug: mauvaise route après une connection utilisateur.
+
     $returnButtonUrl = $this->generateUrl('dm_shopmode_viewBlockList', [
       'cat'  => $cat,
       'page' => $page,
     ]);
 
+//    // !!!! Temporaire -
+//    $returnButtonUrl = $this->generateUrl('dm_shopmode_index');
+//    // !!!
+
     $req->getsession()->set('cat', $cat);
     $req->getSession()->set('page', $page);
+
     $req->getSession()->set('returnButtonUrl', $returnButtonUrl);
   }
   // ------------------------
