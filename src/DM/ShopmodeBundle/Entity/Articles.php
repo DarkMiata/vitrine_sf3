@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Articles
  *
  * @ORM\Table(name="articles", uniqueConstraints={@ORM\UniqueConstraint(name="Index_2", columns={"name"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="DM\ShopmodeBundle\Repository\ArticlesRepository")
  */
 class Articles
 {
@@ -86,6 +86,16 @@ class Articles
 
 
     private $photo;
+
+
+    /**
+    * @ORM\OneToMany(targetEntity="ArticlesPhotos", mappedBy="refArticle")
+    * #ORM\JoinColumn(nullable=true)
+    */
+    private $articlesPhotos;
+
+
+    // ========================================
 
     /**
      * Get id

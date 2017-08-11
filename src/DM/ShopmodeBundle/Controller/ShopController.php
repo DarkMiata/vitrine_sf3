@@ -12,13 +12,13 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 
 use DM\ShopmodeBundle\Entity\Articles;
-
+use DM\ShopmodeBundle\Repository\ArticlesRepository;
 
 class ShopController extends Controller
   {
 
-  const ARTICLE_PAR_PAGE   = 16;
-  const PAGINATION_INDEX   = 4;
+  const ARTICLE_PAR_PAGE = 16;
+  const PAGINATION_INDEX =  4;
   const PATH_IMG_NOT_FOUND = "site/canard-jaune.jpg";
 
   // ========================================
@@ -38,10 +38,13 @@ class ShopController extends Controller
     // Sauvegarde en session les infos de localisation page
     $this->sessionInfoPageSave($req, $cat, $page);
 
-    $countCat  = $this->countCat($cat); // nombre d'article dans la catégorie
-    $maxPage   = ceil($countCat / self::ARTICLE_PAR_PAGE);
-    $indexPage = ($page - 1) * self::ARTICLE_PAR_PAGE;
-    $articles  = $this->findArticlesByPage($indexPage, $cat);
+    $countCat  = $this->getDoctrine()->getRepository(Articles::class)
+        ->countByCat($cat); // nombre d'articles dans la catégorie
+
+    $maxPage    = ceil($countCat / self::ARTICLE_PAR_PAGE);
+    $indexPage  = ($page - 1) * self::ARTICLE_PAR_PAGE;
+    $articles   = $this->getDoctrine()->getRepository(Articles::class)
+        ->findByPage($indexPage, $cat);
 
     foreach ($articles as $article) {
       $photoFileName = $this->findPathPhotoByRef($article->getref());
@@ -183,63 +186,6 @@ class ShopController extends Controller
     }
 
     return $photo;
-  }
-  // ------------------------
-  private function findArticleById($id) {
-    $em = $this->getDoctrine()->getManager();
-
-    $article = $em->getRepository('DMShopmodeBundle:Articles')
-        ->findOneBy(array('id' => $id));
-
-//    if ($article === NULL) {
-//      throw new Exception("findArticleById, id $id non trouvé");
-//    }
-
-    return $article;
-  }
-  // ------------------------
-  private function countCat(string $cat) {
-    $em = $this->getDoctrine()->getManager();
-
-    $repository = $em->getRepository('DMShopmodeBundle:Articles');
-
-    $count = $repository
-        ->createQueryBuilder('a')
-        ->select('COUNT(a)')
-        ->where('a.catName = :cat')
-        ->setparameter('cat', $cat)
-        ->getQuery()
-        ->getSingleScalarResult();
-
-    return $count;
-  }
-  // ------------------------
-  private function getArticleFromDB($categorie, $indexPage) {
-    $em = $this->getDoctrine()->getManager();
-
-    $articles = $em->getRepository('DMShopmodeBundle:Articles')
-        ->findby(
-        ['catName' => $categorie],
-            ['id' => 'asc'],
-            self::ARTICLE_PAR_PAGE,
-            $indexPage
-    );
-
-    return $articles;
-  }
-  // ------------------------
-  private function findArticlesByPage($indexPage, $catName) {
-    $em = $this->getDoctrine()->getManager();
-
-    $articles = $em->getRepository('DMShopmodeBundle:Articles')
-        ->findby(
-        ['catName' => $catName],
-            ['id' => 'asc'],
-            self::ARTICLE_PAR_PAGE,
-            $indexPage
-    );
-
-    return $articles;
   }
   // ------------------------
   private function findPathPhotoByRef($ref) {
