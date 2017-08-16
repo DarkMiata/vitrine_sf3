@@ -4,7 +4,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle"
+            "AppBundle\\": "src/AppBundle",
+            "TestRepoBundle\\": "src/TestRepoBundle"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -13,8 +14,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
-            "DM\\": "src/DM"
+            "DM\\":   "src/DM"
         },
         "files": [
             "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"

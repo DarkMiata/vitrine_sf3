@@ -34,7 +34,7 @@ td {
 }
 
 .cart_produit {
-  width: 400px;
+  width: 500px;
 }
 
 .cart_taille {
@@ -46,13 +46,13 @@ td {
 }
 
 .cart_quantité {
-  width: 80px; 
+  width: 70px; 
 }
 
 .cart_prix {
-  width: 80px;
+  width: 70px;
 }
 
 .cart_btnSup {
-  width: 70px; 
+  width: 35px; 
 }

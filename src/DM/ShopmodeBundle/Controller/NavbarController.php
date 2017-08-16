@@ -4,17 +4,17 @@ namespace DM\ShopmodeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 use DM\ShopmodeBundle\Entity\ArticlesCategories;
 use DM\ShopmodeBundle\Entity\Articles;
 use DM\ShopmodeBundle\Entity\CatType;
+use Symfony\Component\HttpFoundation\Request;
 
 /*
  * Génération du menu - affichage des catégories.
  */
 
 class NavbarController extends Controller
-{
+  {
   // Génération de la navbar.
   public function NavbarAction() {
     $menu = $this->CategoriesMenuDropdown();
@@ -24,19 +24,21 @@ class NavbarController extends Controller
     $artQuant = 0;
 
     // si utilisateur est anonyme, quantité article = 0
-    if ($user == 'anon.') { $artQuant = 0; }
+    if ($user == 'anon.') {
+      $artQuant = 0;
+    }
 
     return $this->render('navbar/shop_navbar.html.twig', [
-      'menu'            => $menu,
-      'articleQuantity' => $artQuant,
-      'user'            => $user,
+          'menu'            => $menu,
+          'articleQuantity' => $artQuant,
+          'user'            => $user,
     ]);
   }
   // ------------------------
   // Génération de la dropdown des catégories
   private function CategoriesMenuDropdown() {
-      $catTypes = $this->getDoctrine()->getRepository(CatType::class)
-    ->findAllOrderedByOrdre();
+    $catTypes = $this->getDoctrine()->getRepository(CatType::class)
+        ->findAllOrderedByOrdre();
 
     foreach ($catTypes as $catType) {
       $catTypeId = $catType->getId();
@@ -52,9 +54,26 @@ class NavbarController extends Controller
 
     return $menu;
   }
-// ========================================
-// ========================================
+  // ------------------------
+  // Génération de l'onglet 'Mon panier' avec le nombre d'articles le contenant
+  public function panierMenuAction(Request $req) {
+    $panier = $req->getSession()->get('panier');
 
+    $countArticle = 0;
+
+    if (isset($panier)) {
+      foreach ($panier as $article) {
+        $countArticle = $countArticle + $article['quantité'];
+      }
+    }
+    else { $this->get('logger')->error('panier non trouvé dans session'); }
+
+    return $this->render('navbar/panier.html.twig', [
+          'articleQuantity' => $countArticle,
+    ]);
+  }
+// ========================================
+// ========================================
   // Renvoi la liste de toutes les catégories
   private function findAllCategories() {
     $em = $this->getDoctrine()->getManager();
@@ -72,10 +91,6 @@ class NavbarController extends Controller
       $em         = $this->getDoctrine()->getManager();
       $repository = $em->getRepository('DMShopmodeBundle:Articles');
 
-      //var_dump($cat);
-
-      //echo $cat->getName();
-
       $countArticlesByCat = $repository
           ->createQueryBuilder('a')
           ->select('COUNT(a)')
@@ -92,8 +107,7 @@ class NavbarController extends Controller
 //            .' - Articles sauvegardé dans catégorie:'. $cat->getCountarticles());
 
         $cat->setCountArticles($countArticlesByCat);
-
       }
     }
   }
-}
+  }

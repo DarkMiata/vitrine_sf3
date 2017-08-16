@@ -87,13 +87,7 @@ class Articles
 
     private $photo;
 
-
-    /**
-    * @ORM\OneToMany(targetEntity="ArticlesPhotos", mappedBy="refArticle")
-    * #ORM\JoinColumn(nullable=true)
-    */
     private $articlesPhotos;
-
 
     // ========================================
 
@@ -331,6 +325,12 @@ class Articles
       $this->photo = $photo;
     }
 
+    function getArticlesPhotos() {
+      return $this->articlesPhotos;
+    }
+     function setArticlesPhotos($articlesPhotos) {
+      $this->articlesPhotos = $articlesPhotos;
+    }
 
 }
 

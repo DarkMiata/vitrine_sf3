@@ -24,7 +24,8 @@
 
       <li class="col-sm-6">
         <!-- == panier == -->
-        {% include 'navbar/panier.html.twig' %}
+{#        {% include 'navbar/panier.html.twig' %} #}
+          {{ render(controller('DM\ShopmodeBundle:Navbar:panierMenu' )) }}
       </li>
     </ul>
 
@@ -32,3 +33,4 @@
 
 </nav>
 
+{#{{ render(controller('FOS\UserBundle:Security:login' )) }}#}

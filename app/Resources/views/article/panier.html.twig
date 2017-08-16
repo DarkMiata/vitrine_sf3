@@ -4,9 +4,6 @@
   {% block title %}ShopmodeBundle - Panier{% endblock %}
   
   {% block stylesheets %}
-    <!-- CSS BLZ -->
-{#    <link rel="stylesheet" type="text/css" href="{{asset('css/global91.css')}}">#}
-
     <link rel="stylesheet" type="text/css" href="{{asset('css/panier.css')}}">
   {% endblock %}
   
@@ -50,9 +47,10 @@
           <td class="center">{{ article.taille }}</td>
           <td class="center">{{ article.prix }}€</td>
           <td class="center">{{ article.quantité }}</td>
-          <td class=""> {{ article.prix*article.quantité }}€</td>
+          <td class="">{{ article.prix*article.quantité }}€</td>
           <td class="center">
-            <a href="{{path('dm_shopmode_supprimeArticlePanierPost',{'token':article.token }) }}">sup</a>
+{#            <a href="{{path('dm_shopmode_supprimeArticlePanierPost',{'token':article.token }) }}">sup</a>#}
+            <a href="{{path('dm_shopmode_supprimeArticlePanierPost',{'token':article.token }) }}"><span class="glyphicon glyphicon-remove"></span></a>
           </td>
 
           {% set total = total + (article.prix * article.quantité) %}

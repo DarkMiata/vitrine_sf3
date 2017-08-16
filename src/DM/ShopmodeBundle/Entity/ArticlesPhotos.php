@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ArticlesPhotos
  *
- * @ORM\Entity
+ * @ORM\Table(name="articles_photos")
+ * @ORM\Entity(repositoryClass="DM\ShopmodeBundle\Repository\ArticlesPhotosRepository")
  */
 class ArticlesPhotos
 {
@@ -22,10 +23,9 @@ class ArticlesPhotos
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="ref_article", type="integer", nullable=false)
+     * @ORM\Column(name="ref_article_id", type="integer", nullable=false)
      */
-    private $refArticle;
+    private $refArticleId;
 
     /**
      * @var string
@@ -53,9 +53,9 @@ class ArticlesPhotos
      *
      * @return ArticlesPhotos
      */
-    public function setRefArticle($refArticle)
+    public function setRefArticleId($refArticle)
     {
-        $this->refArticle = $refArticle;
+        $this->refArticleId = $refArticle;
 
         return $this;
     }
@@ -65,9 +65,9 @@ class ArticlesPhotos
      *
      * @return integer
      */
-    public function getRefArticle()
+    public function getRefArticleId()
     {
-        return $this->refArticle;
+        return $this->refArticleId;
     }
 
     /**

@@ -25,6 +25,11 @@ dm_shopmode:
     prefix:   /shop/
     type: annotation
     
+dm_shopmode_panier:
+    resource: "@DMShopmodeBundle/Controller/PanierController.php"
+    prefix:   /shop/
+    type: annotation
+    
 app:
     resource: '@AppBundle/Controller/'
     prefix:   /
