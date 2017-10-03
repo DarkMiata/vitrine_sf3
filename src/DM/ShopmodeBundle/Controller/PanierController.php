@@ -19,6 +19,7 @@ class PanierController extends Controller
     $ref      = $req->get('ref');
     $taille   = $req->get('taille');
     $quantité = $req->get('quantité');
+    $photoUrl = $req->get('photo');
 
     // récupère le panier en session et ajoute le nouvel article
     $panier = $req->getSession()->get('panier');
@@ -31,6 +32,7 @@ class PanierController extends Controller
       'taille'    => $taille,
       'quantité'  => $quantité,
       'token'     => $token,
+      'photo'     => $photoUrl,
     ];
 
     $session = $req->getSession();

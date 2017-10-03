@@ -13,9 +13,6 @@
   <h2>Panier</h2>
   
   {# bouton retour à la liste #}
-{#  <a href="{{ app.session.get('returnButtonUrl') }}">
-  <img src="{{ asset('images/') }}" alt="retour à la liste" />  </a>#}
-  
   <a href="{{ app.session.get('returnButtonUrl') }}" class="btn btn-sm btn-default">
     <span class="glyphicon glyphicon-arrow-left"></span> Retour à la liste</a>
 {#---------------------------------------#}
@@ -24,7 +21,7 @@
 <table>
   <thead>
     <tr>
-      <th class="center cart_produit">   Produit</th>
+      <th class="center cart_produit" colspan="2">   Produit</th>
       <th class="center cart_taille">    Taille</th>
       <th class="center cart_prixUnit">  Prix unit.</th>
       <th class="center cart_quantité">  Quantité</th>
@@ -39,21 +36,24 @@
     
     {% for article in panier %}
       {% if not article == null %}
-        <tr>
-          <td class="">
+      <td class="cart_photo">
+        <img src="{{ article.photo }}" height=70px width=70px alt="" />
+      </td>
+        <td class="cart_produit">
+          <a  href="{{path('dm_shopmode_article',{'customRef':article.ref }) }}">
             {{ article.marque }} - {{ article.name }}<br>
             REF.: {{ article.ref }}
-          </td>
-          <td class="center">{{ article.taille }}</td>
-          <td class="center">{{ article.prix }}€</td>
-          <td class="center">{{ article.quantité }}</td>
-          <td class="">{{ article.prix*article.quantité }}€</td>
-          <td class="center">
-{#            <a href="{{path('dm_shopmode_supprimeArticlePanierPost',{'token':article.token }) }}">sup</a>#}
-            <a href="{{path('dm_shopmode_supprimeArticlePanierPost',{'token':article.token }) }}"><span class="glyphicon glyphicon-remove"></span></a>
-          </td>
+          </a>
+        </td>
+        <td class="center">{{ article.taille }}</td>
+        <td class="center">{{ article.prix }}€</td>
+        <td class="center">{{ article.quantité }}</td>
+        <td class="">{{ article.prix*article.quantité }}€</td>
+        <td class="center">
+          <a href="{{path('dm_shopmode_supprimeArticlePanierPost',{'token':article.token }) }}"><span class="glyphicon glyphicon-remove"></span></a>
+        </td>
 
-          {% set total = total + (article.prix * article.quantité) %}
+        {% set total = total + (article.prix * article.quantité) %}
         </tr>
       {% endif %}
     {% endfor %}
@@ -65,15 +65,15 @@
   
   <tbody>
     <tr>
-      <td right colspan="3">Montant des frais de préparation</td>
+      <td right colspan="4">Montant des frais de préparation</td>
       <td center colspan="3">{{ frais_prépa }}€</td>
     </tr>
     <tr>
-      <td right colspan="3">Montant des frais de livraison</td>
+      <td right colspan="4">Montant des frais de livraison</td>
       <td center colspan="3">Gratuit</td>
     </tr>
     <tr>
-      <td right colspan="3">Montant de ma commande (TTC)</td>
+      <td right colspan="4">Montant de ma commande (TTC)</td>
       <td center colspan="3">{{ total }}€</td>
     </tr>
   </tbody>

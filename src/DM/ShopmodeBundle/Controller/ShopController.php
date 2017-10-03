@@ -30,6 +30,15 @@ class ShopController extends Controller
   public function indexAction(Request $req) {
     $currentUrl = $this->getCurrentUrlToSession($req);
 
+    // Par défaut, la première page est la page T-shirt (temporaire)
+    if (isset($currentUrl) == null)
+    {
+      $currentUrl = $this->generateUrl('dm_shopmode_viewBlockList', [
+      'cat'  => 'T-shirt',
+      'page' => 1,
+        ]);
+    }
+
     return $this->redirect($currentUrl);
   }
   // ------------------------

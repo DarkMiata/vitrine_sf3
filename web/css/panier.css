@@ -34,7 +34,8 @@ td {
 }
 
 .cart_produit {
-  width: 500px;
+  width: 350px;
+  font-size: 12px;
 }
 
 .cart_taille {
@@ -55,4 +56,10 @@ td {
 
 .cart_btnSup {
   width: 35px; 
+}
+
+.cart_photo {
+  width: 80px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }

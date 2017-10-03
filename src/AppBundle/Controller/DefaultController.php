@@ -25,14 +25,13 @@ class DefaultController extends Controller
    */
   public function testAction()
   {
-    $article = $this->getDoctrine()->getRepository(Articles::class)->findOneById(4);
+    //$article = $this->getDoctrine()->getRepository(Articles::class)->findOneById(4);
 
-    var_dump($article);
+    //var_dump($article);
 
     return $this->render('divers/test.html.twig', array(
     ));
   }
-
 
   // ========================================
   // ========================================
